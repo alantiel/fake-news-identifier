@@ -1,0 +1,113 @@
+## https://www.andreagrandi.it/2013/02/24/using-twitter-bootstrap-with-node-js-express-and-jade/
+## Google API key = AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go
+## Google cx (portais) = 008799506537989115616:9mdr3jf9dm8
+
+extends layout
+
+block content
+  h1= title
+
+  p Welcome to #{title}
+
+  div#accordion(role="tablist")
+    div.card
+      div#headingOne.card-header(role="tab", data-pass="#{validationOne.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseOne", aria-expanded="false", aria-controls="collapseOne")
+            [1] &nbsp;Be skeptical of headlines.
+
+      div#collapseOne.collapse(role="tabpanel", aria-labelledby="headingOne", data-parent="#accordion")
+        div.card-body
+          False news stories often have catchy headlines in all caps with exclamation points. If shocking claims in the headline sound unbelievable, they probably are.
+
+    div.card
+      div#headingTwo.card-header(role="tab", data-pass="#{validationTwo.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseTwo", aria-expanded="false", aria-controls="collapseTwo")
+            [2] &nbsp;Look closely at the URL.
+
+      div#collapseTwo.collapse(role="tabpanel", aria-labelledby="headingTwo", data-parent="#accordion")
+        div.card-body
+          A phony or look-alike URL may be a warning sign of false news. Many false news sites mimic authentic news sources by making small changes to the URL. You can go to the site to compare the URL to established sources.
+
+     div.card
+      div#headingThree.card-header(role="tab", data-pass="#{validationThree.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseThree", aria-expanded="false", aria-controls="collapseThree")
+            [3] &nbsp;Investigate the source.
+
+      div#collapseThree.collapse(role="tabpanel", aria-labelledby="headingThree", data-parent="#accordion")
+        div.card-body
+          Ensure that the story is written by a source that you trust with a reputation for accuracy. If the story comes from an unfamiliar organization, check their "About" section to learn more.
+
+     div.card
+      div#headingFour.card-header(role="tab", data-pass="#{validationFour.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseFour", aria-expanded="false", aria-controls="collapseFour")
+            [4] &nbsp;Watch for unusual formatting.
+
+      div#collapseFour.collapse(role="tabpanel", aria-labelledby="headingFour", data-parent="#accordion")
+        div.card-body
+          Many false news sites have misspellings or awkward layouts. Read carefully if you see these signs.
+
+     div.card
+      div#headingFive.card-header(role="tab", data-pass="#{validationFive.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseFive", aria-expanded="false", aria-controls="collapseFive")
+            [5] &nbsp;Consider the photos.
+
+      div#collapseFive.collapse(role="tabpanel", aria-labelledby="headingFive", data-parent="#accordion")
+        div.card-body
+          False news stories often contain manipulated images or videos. Sometimes the photo may be authentic, but taken out of context. You can search for the photo or image to verify where it came from.
+
+     div.card
+      div#headingSix.card-header(role="tab", data-pass="#{validationSix.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseSix", aria-expanded="false", aria-controls="collapseSix")
+            [6] &nbsp;Inspect the dates.
+
+      div#collapseSix.collapse(role="tabpanel", aria-labelledby="headingSix", data-parent="#accordion")
+        div.card-body
+          False news stories may contain timelines that make no sense, or event dates that have been altered.
+
+     div.card
+      div#headingSeven.card-header(role="tab", data-pass="#{validationSeven.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseSeven", aria-expanded="false", aria-controls="collapseSeven")
+            [7] &nbsp;Check the evidence.
+
+      div#collapseSeven.collapse(role="tabpanel", aria-labelledby="headingSeven", data-parent="#accordion")
+        div.card-body
+          Check the author's sources to confirm that they are accurate. Lack of evidence or reliance on unnamed experts may indicate a false news story.
+
+     div.card
+      div#headingEight.card-header(role="tab", data-pass="#{validationEight.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseEight", aria-expanded="false", aria-controls="collapseEight")
+            [8] &nbsp;Look at other reports.
+
+      div#collapseEight.collapse(role="tabpanel", aria-labelledby="headingEight", data-parent="#accordion")
+        div.card-body
+          If no other news source is reporting the same story, it may indicate that the story is false. If the story is reported by multiple sources you trust, it's more likely to be true.
+
+     div.card
+      div#headingNine.card-header(role="tab", data-pass="#{validationNine.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseNine", aria-expanded="false", aria-controls="collapseNine")
+            [9] &nbsp;Is the story a joke?
+
+      div#collapseNine.collapse(role="tabpanel", aria-labelledby="headingNine", data-parent="#accordion")
+        div.card-body
+          Sometimes false news stories can be hard to distinguish from humor or satire. Check whether the source is known for parody, and whether the story's details and tone suggest it may be just for fun.
+
+     div.card
+      div#headingTen.card-header(role="tab", data-pass="#{validationTen.pass}")
+        h5.mb-0
+          a(data-toggle="collapse", href="#collapseTen", aria-expanded="false", aria-controls="collapseTen")
+            [10] Some stories are intentionally false.
+
+      div#collapseTen.collapse(role="tabpanel", aria-labelledby="headingTen", data-parent="#accordion")
+        div.card-body
+          Think critically about the stories you read, and only share news that you know to be credible.
+
+  div.footer
