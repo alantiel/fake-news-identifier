@@ -12,11 +12,18 @@ const Diff = require('mdiff').Diff;
 
 router.get('/', function(req, res, next) {
   var article = {
+<<<<<<< HEAD
 	//title: 'WARNING: THIS IS FAKE!!',
 	title: 'In an Age of Fake News, a Historian of the Hoax - The New York Times',
 	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',
    url: 'http://cnnn.com/news/1',
 	date: 'Nov 6, 2017'
+=======
+	title: 'WARNING: THIS IS FAKE!!',
+	desc: 'Just more one fake text... Here is a misspled text too. True fake neus! geology',
+   url: 'http://cnnn.com/news/1',
+   img:'https://cloud.google.com/vision/images/rushmore.jpg'
+>>>>>>> 0ffbcae71865354d313e0faf60fa414776c82de2
   }
 
   res.render('index', { 
@@ -26,11 +33,11 @@ router.get('/', function(req, res, next) {
 	validationTwo: validateURL(article.url),
 	validationThree: validationThree(article.url),
 	validationFour: validateFormatting(article),
-	validationFive: {pass: true},
-	validationSix: validateDate(article),
+	validationFive: validateImage(article),
+	validationSix: {pass:true},//validateDate(article),
 	validationSeven: {pass: true},
 	validationEight: {pass: true},
-	validationNine: {pass: true},
+	validationNine: validationJoke(article.url),
 	validationTen: {pass: true}
   });
 
@@ -160,5 +167,46 @@ validateDate = function(article) {
 	
 	return {pass: resSize > 0};
 }
+validateImage = function(article){
+	var res = request('POST', 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY', {
+		json: { 
+			"requests": [
+				{
+				  "image": {
+					"source": {
+					  "imageUri": article.img
+					}
+				  },
+				  "features": [
+					{
+					  "type": "LABEL_DETECTION",
+					  "maxResults": 10
+					}
+				  ]
+				}
+			  ]
+		}
+	  });
+	var jsonResult = JSON.parse(res.getBody('utf8'));
+	
+	var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
+		.filter((description) => article.desc.indexOf(description) !== -1);
+
+	console.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
+	console.log('matches:'+ filters)
+	var result = filters.length > 0
+	return {pass: result};
+}
+
+validationJoke = function(url){
+	var knowedDomains = ['thechive.com', 'cracked.com', 'break.com'];
+	var host = url.split("/")[2];
+	
+	if(knowedDomains.indexOf(host) != -1){
+		return { pass:false}
+	}	
+	return{ pass: true}
+}
+
 
 module.exports = router;
