@@ -1,36 +1,7 @@
-const express = require('express');
 const request = require('sync-request');
 const Typo = require('typo-js');
 const levenshtein = require('fast-levenshtein')
 const dictionary = new Typo("en_US");
-
-const router = express.Router();
-
-
-router.get('/', function(req, res, next) {
-  var article = {
-	title: 'WARNING: THIS IS FAKE!!',
-	desc: 'Just more one fake text... Here is a misspled text too. True fake neus! geology',
-   url: 'http://cnnn.com/news/1',
-   img:'https://cloud.google.com/vision/images/rushmore.jpg'
-  }
-
-  res.render('index', { 
-	title: 'Fake News Identifier',
-	article: article,
-	validationOne: validateHeadline(article.title),
-	validationTwo: validateURL(article.url),
-	validationThree: validationThree(article.url),
-	validationFour: validateFormatting(article),
-	validationFive: validateImage(article),
-	validationSix: {pass:true},//validateDate(article),
-	validationSeven: {pass: true},
-	validationEight: {pass: true},
-	validationNine: {pass: true},
-	validationTen: {pass: true}
-  });
-
-});
 
 function checkExclamationPointsRatio (article) {
 	return article.match(/!/g) ? article.match(/!/g).length : 0;
@@ -96,7 +67,7 @@ validateURL = function(url) {
 	return {pass: pass, url: closestURL}
 }
 
-validateFormatting = function(article) {
+ function validateFormatting(article) {
 	var keywords = article.title.match(/\b(\w+)\b/g).concat(article.desc.match(/\b(\w+)\b/g))
 	var contWrorg = 0;
 
@@ -112,7 +83,7 @@ validateFormatting = function(article) {
 	return { pass:(contWrorg < 2) , cont: contWrorg};
 }
 
-validationThree = function(url){
+function validationThree(url){
 
 	var whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
 	var blackList = [ 'bcc.com', 'cnm.com', 'nsm.com'];
@@ -148,7 +119,7 @@ validateImage = function(article){
 				{
 				  "image": {
 					"source": {
-					  "imageUri": article.img
+					  "imageUri": article.imgCloud
 					}
 				  },
 				  "features": [
@@ -171,4 +142,60 @@ validateImage = function(article){
 	var result = filters.length > 0
 	return { pass: result };
 }
-module.exports = router;
+
+var articles = [
+    {
+        title: 'Chefe da Guarda Civil de SP diz que bairro é só um dos fatores que influenciam abordagens policiais',
+        desc: ' Em um debate sobre como as autoridades policiais devem se dirigir às pessoas nas ruas, o comandante geral da GCM (Guarda Civil Metropolitana) de São Paulo, Adelson de Souza, disse que "cada abordagem é diferente" -- e o local da cidade onde ela acontece não pode ser determinante para uma ação policial diferenciada.',
+        url: 'http://cnnn.com/news/1',
+        imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg',
+        imgUrl: 'https://conteudo.imguol.com.br/c/noticias/67/2017/11/08/08nov2017---comandante-geral-da-gcm-de-sp-adelson-de-souza-1510158156286_300x420.jpg',
+    },    
+    {
+        title: 'A chocante foto de elefantes em chamas premiada em concurso!!!!',
+        desc: 'A imagem de dois elefantes fugindo de uma multidão que ateava fogo neles foi escolhida como a vencedora de um prêmio de fotografia da vida selvagem.',
+        url: 'http://cnnn.com/news/1',
+        imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg',
+        imgUrl: 'https://conteudo.imguol.com.br/c/noticias/3c/2017/11/08/a-imagem-de-dois-elefantes-fugindo-de-uma-multidao-que-ateava-fogo-neles-foi-escolhida-como-a-vencedora-de-um-premio-de-fotografia-da-vida-selvagem-1510158759882_615x300.jpg',
+    }
+]
+
+module.exports = function() {
+    articles.forEach(function(article) {
+        var validations = [];
+        var isValidStep1 = validateHeadline(article.title);
+        validations.push({step:1, valid: isValidStep1.pass});
+
+        var isValidStep2 = validateURL(article.url);
+        validations.push({step:2, valid: isValidStep2.pass});
+
+        var isValidStep3 = validationThree(article.url);
+        validations.push({step:3, valid: isValidStep3.pass});
+      
+        var isValidStep4 = validateFormatting(article);
+        validations.push({step:4, valid: isValidStep4.pass});
+
+        var isValidStep5 = validateImage(article);
+        validations.push({step:5, valid: isValidStep5.pass})
+   
+        var isValidStep6 = {step:6, valid: true};
+        validations.push(isValidStep6)
+
+        var isValidStep7 = {step:7, valid: true};
+        validations.push(isValidStep7)
+
+        var isValidStep8 = {step:8, valid: true};
+        validations.push(isValidStep8)
+
+        var isValidStep9 = {step:9, valid: true};
+        validations.push(isValidStep9)
+
+        var isValidStep10 = {step:10, valid: true};
+        validations.push(isValidStep10)
+
+        article['validations'] = validations;
+        article['score'] = validations.filter((validation) => validation.valid === true).length * 10;
+    });
+    console.log(articles);
+    return articles;
+}

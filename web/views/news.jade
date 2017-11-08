@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  p Welcome to #{title}
+
+  div.card-deck
+    each article in articles
+        div.card(style='width: 20rem;')
+            img.card-img-right(src='#{article.imgUrl}', alt='Card image cap')
+            div.card-body
+                h4.card-title #{article.title}
+                p.card-text #{article.desc}
+                .progress
+                    .progress-bar.bg-success(role='progressbar', style='width: #{article.score}%', aria-valuenow='#{article.score}', aria-valuemin='0', aria-valuemax='100') #{article.score}% - Verificado
+
+            
