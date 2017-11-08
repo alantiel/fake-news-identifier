@@ -99,48 +99,94 @@ function validationThree(url){
 }
 
 validateDate = function(article) {
-	let date = article.date;
 	let title = article.title;
 
 	const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go';
 	const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
 	const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8';
+	const G_NUM_RETURN = '5';
 
-	console.log(G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
-	let res = request('GET', G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
+	let res = request('GET', G_ENDPOINT
+		.concat('?key=')
+		.concat(G_API_KEY)
+		.concat('&cx=')
+		.concat(G_CX_WHITELIST)
+		.concat('&num=')
+		.concat(G_NUM_RETURN)
+		.concat('&q=')
+		.concat(article.title));
 
-	console.log(JSON.parse(res.getBody('utf8')))
+	let items = JSON.parse(res.getBody('utf8')).items;
 
-}
-validateImage = function(article){
-	var res = request('POST', 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY', {
-		json: { 
-			"requests": [
-				{
-				  "image": {
-					"source": {
-					  "imageUri": article.imgCloud
-					}
-				  },
-				  "features": [
-					{
-					  "type": "LABEL_DETECTION",
-					  "maxResults": 10
-					}
-				  ]
-				}
-			  ]
-		}
-	  });
-	var jsonResult = JSON.parse(res.getBody('utf8'));
+	let resSize = items.filter(function(item){
+		return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
+	}).filter(function(item){
+		diff = new Diff(item.title, title);
+		lcs = diff.getLcs();
+		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
+	}).filter(function(item) {
+		let articleDate = new Date(article.date);
+		let limitDays = 7;
+		let itemDate = new Date(item.pagemap.newsarticle[0].datepublished);
+		return compareDates.isBetween(itemDate, compareDates.add(articleDate, limitDays*-1, 'day'), compareDates.add(articleDate, limitDays, 'day'));
+	}).length;
+
 	
-	var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
-		.filter((description) => article.desc.indexOf(description) !== -1);
+	return {pass: resSize > 0};
+}
 
-	console.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
-	console.log('matches:'+ filters)
-	var result = filters.length > 0
-	return { pass: result };
+validateOtherSources = function(article) {
+	/*let title = article.title;
+
+	const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go';
+	const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
+	const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8';
+	const G_NUM_RETURN = '5';
+    const G_CX_BLACKLIST = [ 'bcc.com', 'cnm.com', 'nsm.com'];
+	let resWhitelist = request('GET', G_ENDPOINT
+		.concat('?key=')
+		.concat(G_API_KEY)
+		.concat('&cx=')
+		.concat(G_CX_WHITELIST)
+		.concat('&num=')
+		.concat(G_NUM_RETURN)
+		.concat('&q=')
+		.concat(article.title));
+
+	let whitelistItems = JSON.parse(resWhitelist.getBody('utf8')).items;
+
+	let resWhitelistSize = whitelistItems.filter(function(item){
+		return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
+	}).filter(function(item){
+		diff = new Diff(item.title, title);
+		lcs = diff.getLcs();
+		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
+	}).length;
+
+	let resBlacklist = request('GET', G_ENDPOINT
+		.concat('?key=')
+		.concat(G_API_KEY)
+		.concat('&cx=')
+		.concat(G_CX_BLACKLIST)
+		.concat('&num=')
+		.concat(G_NUM_RETURN)
+		.concat('&q=')
+		.concat(article.title));
+
+	let blacklistItems = JSON.parse(resBlacklist.getBody('utf8')).items;
+
+	let resBlacklistSize = blacklistItems.filter(function(item){
+		return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
+	}).filter(function(item){
+		diff = new Diff(item.title, title);
+		lcs = diff.getLcs();
+		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
+	}).length;
+
+	
+    return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? 'false' : 'unknow'}; 
+    */
+    return {pass : true};
 }
 
 var articles = [
@@ -186,7 +232,7 @@ module.exports = function() {
         var isValidStep7 = {step:7, valid: true};
         validations.push(isValidStep7)
 
-        var isValidStep8 = {step:8, valid: true};
+        var isValidStep8 = validateOtherSources(article);
         validations.push(isValidStep8)
 
         var isValidStep9 = {step:9, valid: true};

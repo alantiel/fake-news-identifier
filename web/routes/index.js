@@ -16,9 +16,9 @@ router.get('/', function(req, res, next) {
 	//title: 'WARNING: THIS IS FAKE!!',
 	title: 'In an Age of Fake News, a Historian of the Hoax - The New York Times',
 	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',
-   url: 'http://cnnn.com/news/1',
+    url: 'http://cnnn.com/news/1',
 	date: 'Nov 6, 2017',
-	img:'https://cloud.google.com/vision/images/rushmore.jpg'
+	imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg'
   }
 
   res.render('index', { 
@@ -169,7 +169,7 @@ validateImage = function(article){
 				{
 				  "image": {
 					"source": {
-					  "imageUri": article.img
+					  "imageUri": article.imgCloud
 					}
 				  },
 				  "features": [
@@ -181,7 +181,8 @@ validateImage = function(article){
 				}
 			  ]
 		}
-	  });
+      });
+      
 	var jsonResult = JSON.parse(res.getBody('utf8'));
 	
 	var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
