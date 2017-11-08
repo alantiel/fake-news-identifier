@@ -20,10 +20,10 @@ router.get('/', function(req, res, next) {
 	validationTwo: service.validateURL(article.url),
 	validationThree: service.validationThree(article.url),
 	validationFour: service.validateFormatting(article),
-	validationFive: service.validateImage(article),
+	validationFive: {pass: true}, //service.validateImage(article),
 	validationSix: {pass: true},//service.validateDate(article),
 	validationSeven: {pass: true},
-	validationEight: {pass: true},
+	validationEight: service.validateOtherSources(article), //{pass: true},
 	validationNine: service.validationJoke(article.url),
 	validationTen: {pass: true}
   });

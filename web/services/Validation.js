@@ -109,8 +109,6 @@ function validationThree(url){
 validateDate = function(article) {
 	let title = article.title;
 
-	
-
 	const G_NUM_RETURN = '5';
 
 	let res = request('GET', G_ENDPOINT
@@ -209,7 +207,7 @@ validateOtherSources = function(article) {
 	
     return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? 'false' : 'unknow'}; 
     */
-    return {pass : true};
+    return {pass : false};
 }
 
 var articles = [
@@ -354,7 +352,8 @@ var service = {
 	validateFormatting,
 	validateImage,
 	validateDate,
-	validationJoke
+	validationJoke,
+	validateOtherSources
 }
 
 module.exports = service; 
