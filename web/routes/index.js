@@ -28,7 +28,44 @@ router.get('/', function(req, res, next) {
 
 });
 
+function checkExclamationPoints (article) {
+	return article.match(/!/g).length;
+}
+
+function checkUpperCaseWords (article) {
+	let letters = article.match(/[A-z]/g).length;
+	let upperLetters = article.match(/[A-Z]/g).length;
+
+	return upperLetters/letters;
+}
+
+function checkSensationalismExpression (article) {
+	let sensationalExpressions = [
+		"you won't believe what happened", 
+		"check this out",
+		"oh my god"
+	];
+
+	let senExprCount = 0;
+	sensationalExpressions.forEach(function(exp) {
+		let matched = article.match(new RegExp(exp, "i"));
+		if (matched) {
+			senExprCount++;
+		}
+	});
+
+	return senExprCount;
+}
+
 validationOne = function(article) {
+	let title = article.title;
+	let exc = checkExclamationPoints(title);
+	let upp = checkUpperCaseWords(title);
+	let sen = checkSensationalismExpression(title); 
+	console.log("checkExclamationPoints = " + exc);
+	console.log("checkUpperCaseWords = " + upp);
+	console.log("checkSensationalismExpression = " + sen);
+
 	return 0;
 }
 
