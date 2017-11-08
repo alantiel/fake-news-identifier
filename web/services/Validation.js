@@ -145,7 +145,7 @@ validateDate = function(article) {
 validationThree = function(url){
 
 	var whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
-	var blackList = [ 'bcc.com', 'cnm.com', 'nsm.com'];
+	var blackList = [ 'bcc.com', 'cnm.com', 'nsm.com','nationalreport.net'];
 	var host = url.split("/")[2];
 
 	if(whiteList.indexOf(host) != -1){
@@ -202,27 +202,28 @@ validateOtherSources = function(article) {
 		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
 	}).length;
 
-   return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? 'false' : 'unknow'}; 
+   return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? 'false' : 'unknow', step:8}; 
     
 }
 
 var articles = [
     {
-        title: 'Chefe da Guarda Civil de SP diz que bairro é só um dos fatores que influenciam abordagens policiais',
-        desc: ' Em um debate sobre como as autoridades policiais devem se dirigir às pessoas nas ruas, o comandante geral da GCM (Guarda Civil Metropolitana) de São Paulo, Adelson de Souza, disse que "cada abordagem é diferente" -- e o local da cidade onde ela acontece não pode ser determinante para uma ação policial diferenciada.',
-        url: 'http://cnnn.com/news/1',
-        imgCloud:'https://storage.googleapis.com/fakenews_hackaton/police.jpg',
-        imgUrl: 'https://conteudo.imguol.com.br/c/noticias/67/2017/11/08/08nov2017---comandante-geral-da-gcm-de-sp-adelson-de-souza-1510158156286_300x420.jpg',
-        originUrl:'https://noticias.uol.com.br/cotidiano/ultimas-noticias/2017/11/08/comandante-da-guarda-civil-de-sao-paulo-diz-que-bairro-de-um-dos-fatores-que-influenciam-abordagens-policiais.htm'
-    },    
-    {
-        title: 'A chocante foto de elefantes em chamas premiada em concurso',
-        desc: 'A imagem de dois elefantes fugindo de uma multidão que ateava fogo neles foi escolhida como a vencedora de um prêmio de fotografia da vida selvagem. elephant',
-        url: 'http://cnnn.com/news/1',
+        title: 'Photo of elephant and calf fleeing fire-throwing mob wins top prize',
+        desc: 'An arresting image showing an adult elephant and its calf fleeing a mob attack has won a top Asian wildlife photography prize.	It shows the two animals running among a crowd that has hurled flaming tar balls and crackers at them, reportedly to ward the elephants away from human settlements.',
+        url: 'https://www.theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize',
         imgCloud:'https://storage.googleapis.com/fakenews_hackaton/elefante.jpg',
-        imgUrl: 'https://conteudo.imguol.com.br/c/noticias/3c/2017/11/08/a-imagem-de-dois-elefantes-fugindo-de-uma-multidao-que-ateava-fogo-neles-foi-escolhida-como-a-vencedora-de-um-premio-de-fotografia-da-vida-selvagem-1510158759882_615x300.jpg',
-        originUrl:'https://noticias.uol.com.br/meio-ambiente/ultimas-noticias/bbc/2017/11/08/a-chocante-foto-de-elefantes-em-chamas-premiada-em-concurso.htm'
-    }
+        imgUrl: 'https://storage.googleapis.com/fakenews_hackaton/elefante.jpg',
+        originUrl:'https://www.theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize'
+	},
+	{
+	title: 'ALEX JONES SUGGESTS FLYING FALSE FLAG AT HALF-STAFF FOR TEXAS CHURCH SHOOTING VICTIMS',
+	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',
+    url: 'http://nationalreport.net/alex-jones-suggests-flying-false-flag-half-staff-texas-church-shooting-victims/',
+	date: 'Jan 6, 2017',
+	imgCloud:'http://nationalreport.net/wp-content/uploads/2017/11/8368024532_d74e9d988d_z.jpg',
+	imgUrl: 'http://nationalreport.net/wp-content/uploads/2017/11/8368024532_d74e9d988d_z.jpg',
+	originUrl:'http://nationalreport.net/alex-jones-suggests-flying-false-flag-half-staff-texas-church-shooting-victims/'  
+   }
 ]
 
 var validateImage = function(article){
@@ -248,13 +249,18 @@ var validateImage = function(article){
       
 	var jsonResult = JSON.parse(res.getBody('utf8'));
 	
-	var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
-		.filter((description) => article.desc.indexOf(description) !== -1);
+	if(jsonResult.responses[0].labelAnnotations){
+		var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
+			.filter((description) => article.desc.indexOf(description) !== -1);
 
-	console.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
-	console.log('matches:'+ filters)
-	var result = filters.length > 0
-	return { pass: result };
+		console.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
+		console.log('matches:'+ filters)
+		var result = filters.length > 0
+		return { pass: result };
+	}else{
+		return { pass:false };
+	}
+
 }
 
 var validationJoke = function(url){
@@ -319,23 +325,31 @@ var service = {
         var isValidStep5 = validateImage(article);
         validations.push({step:5, valid: isValidStep5.pass})
    
-        var isValidStep6 = {step:6, valid: true};
+		var isValidStep6 = validateDate(article);
+		isValidStep6['valid'] = isValidStep6.pass;
         validations.push(isValidStep6)
 
         var isValidStep7 = {step:7, valid: true};
         validations.push(isValidStep7)
 
-        var isValidStep8 = validateOtherSources(article);
-        validations.push(isValidStep8)
+		var isValidStep8 = validateOtherSources(article);
+		isValidStep8['valid'] = isValidStep8.pass;
+        validations.push(isValidStep8);
 
-        var isValidStep9 = {step:9, valid: true};
+		var isValidStep9 = validationJoke(article.url);
+		isValidStep9['valid'] = isValidStep9.pass;
+		isValidStep9['step9'] = 'step9';
         validations.push(isValidStep9)
 
         var isValidStep10 = {step:10, valid: true};
         validations.push(isValidStep10)
-
+		
+		validations.forEach((validation)=>{
+			console.log(validation);
+		});
+		
         article['validations'] = validations;
-        article['score'] = validations.filter((validation) => validation.valid === false).length * 10;
+        article['score'] = validations.filter((validation) => validation.valid === false ).length * 10;
     });
     console.log(articles);
     return articles;

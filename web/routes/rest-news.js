@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var url = req.query.url;
     
-    var articles = validationService();
+    var articles = validationService.articles();
     var score = articles.filter(article => article.originUrl === url)
     .map(article => article.score)
     score = score.length > 0 ? score[0] : 0;
