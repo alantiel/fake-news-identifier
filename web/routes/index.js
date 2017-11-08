@@ -6,9 +6,10 @@ router.get('/', function(req, res, next) {
   var article = {
 
 	//title: 'WARNING: THIS IS FAKE!!',
-	title: 'In an Age of Fake News, a Historian of the Hoax - The New York Times',
+	//title: 'In an Age of Fake News, a Historian of the Hoax - The New York Times',
+	title: 'ALEX JONES SUGGESTS FLYING FALSE FLAG AT HALF-STAFF FOR TEXAS CHURCH SHOOTING VICTIMS',
 	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',
-    url: 'http://cnnn.com/news/1',
+   url: 'http://cnnn.com/news/1',
 	date: 'Jan 6, 2017',
 	imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg'
   }
@@ -23,7 +24,7 @@ router.get('/', function(req, res, next) {
 	validationFive: {pass: true}, //service.validateImage(article),
 	validationSix: {pass: true},//service.validateDate(article),
 	validationSeven: {pass: true},
-	validationEight: service.validateOtherSources(article), //{pass: true},
+	validationEight: {pass: true}, //service.validateOtherSources(article), 
 	validationNine: service.validationJoke(article.url),
 	validationTen: {pass: true}
   });

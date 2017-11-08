@@ -11,6 +11,8 @@ const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
 //const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8'; //alan
 const G_CX_WHITELIST = '000736769589540582836:fcooc21yaqq'; //makoto
 
+const G_CX_BLACKLIST = '000736769589540582836:lqjfyjgyf0g'; // makoto
+
 function checkExclamationPointsRatio (article) {
 	return article.match(/!/g) ? article.match(/!/g).length : 0;
 }
@@ -157,13 +159,10 @@ validationThree = function(url){
 
 
 validateOtherSources = function(article) {
-	/*let title = article.title;
+	let title = article.title;
 
-	const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go';
-	const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
-	const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8';
 	const G_NUM_RETURN = '5';
-    const G_CX_BLACKLIST = [ 'bcc.com', 'cnm.com', 'nsm.com'];
+
 	let resWhitelist = request('GET', G_ENDPOINT
 		.concat('?key=')
 		.concat(G_API_KEY)
@@ -177,9 +176,7 @@ validateOtherSources = function(article) {
 	let whitelistItems = JSON.parse(resWhitelist.getBody('utf8')).items;
 
 	let resWhitelistSize = whitelistItems.filter(function(item){
-		return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
-	}).filter(function(item){
-		diff = new Diff(item.title, title);
+		diff = new Diff(item.title.toUpperCase(), title.toUpperCase());
 		lcs = diff.getLcs();
 		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
 	}).length;
@@ -194,20 +191,19 @@ validateOtherSources = function(article) {
 		.concat('&q=')
 		.concat(article.title));
 
-	let blacklistItems = JSON.parse(resBlacklist.getBody('utf8')).items;
+	let blacklistResponse = JSON.parse(resBlacklist.getBody('utf8'));
+	let blacklistItems = blacklistResponse.items || [];
 
 	let resBlacklistSize = blacklistItems.filter(function(item){
-		return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
-	}).filter(function(item){
-		diff = new Diff(item.title, title);
+		diff = new Diff(item.title.toUpperCase(), title.toUpperCase());
 		lcs = diff.getLcs();
+		console.log("f0", item.title, title);
+		console.log("f2", lcs.length >= 0.8 * Math.min(item.title.length, title.length));
 		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
 	}).length;
 
-	
-    return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? 'false' : 'unknow'}; 
-    */
-    return {pass : false};
+   return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? 'false' : 'unknow'}; 
+    
 }
 
 var articles = [
