@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { 
 	title: 'Fake News Identifier',
 	article: article,
-	validationOne: { pass: true, contUpperWords: 0, contExclamationPoints: 0},
+	validationOne: validateHeadline(article.title),
 	validationTwo: validateURL(article.url),
 	validationThree: validationThree(article.url),
 	validationFour: validateFormatting(article),
@@ -30,18 +30,18 @@ router.get('/', function(req, res, next) {
 
 });
 
-function checkExclamationPoints (article) {
+function checkExclamationPointsRatio (article) {
 	return article.match(/!/g).length;
 }
 
-function checkUpperCaseWords (article) {
+function checkUpperCaseLettersRatio (article) {
 	let letters = article.match(/[A-z]/g).length;
 	let upperLetters = article.match(/[A-Z]/g).length;
 
 	return upperLetters/letters;
 }
 
-function checkSensationalismExpression (article) {
+function checkSensationalismExpressionRatio (article) {
 	let sensationalExpressions = [
 		"you won't believe what happened", 
 		"check this out",
@@ -59,14 +59,14 @@ function checkSensationalismExpression (article) {
 	return senExprCount;
 }
 
-validationOne = function(article) {
-	let title = article.title;
-	let exc = checkExclamationPoints(title);
-	let upp = checkUpperCaseWords(title);
-	let sen = checkSensationalismExpression(title); 
-	console.log("checkExclamationPoints = " + exc);
-	console.log("checkUpperCaseWords = " + upp);
-	console.log("checkSensationalismExpression = " + sen);
+validateHeadline = function(title) {
+	let exc = checkExclamationPointsRatio(title);
+	let upp = checkUpperCaseLettersRatio(title);
+	let sen = checkSensationalismExpressionRatio(title);
+	console.log("Title = " + title);
+	console.log("checkExclamationPointsRatio = " + exc);
+	console.log("checkUpperCaseLettersRatio = " + upp);
+	console.log("checkSensationalismExpressionRatio = " + sen);
 
 	return 0;
 }
