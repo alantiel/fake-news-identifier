@@ -3,17 +3,22 @@ extends layout
 block content
   h1= title
 
-  p Bem vindo ao #{title}
+  p Welcome to #{title}
 
   div.card-deck
-    each article in articles
+    for article, index in articles
         div.card(style='width: 20rem;')
             img.card-img-right(src='#{article.imgUrl}', alt='Card image cap')
             div.card-body
                 h4.card-title #{article.title}
-                p.card-text #{article.desc}
-                .progress
-                    .progress-bar.bg-danger(role='progressbar', style='width: #{article.score}%', aria-valuenow='#{article.score}', aria-valuemin='0', aria-valuemax='100')
-                        | Taxa fake: #{article.score}%
-
-            
+                p.card-text(style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75ch;') #{article.desc}
+                a(href='#') Ler mais
+                div
+                    .progress(style='margin-top: 10px')
+                        .progress-bar.bg-danger(role='progressbar',
+                            style='width: #{article.score}%', aria-valuenow='#{article.score}', 
+                            aria-valuemin='0', aria-valuemax='100')
+                            | Fake-o-meter: #{article.score}%
+                    .btn-group(role='group', aria-label='Basic example', style="margin-top: 15px; float: right")
+                        button.btn.btn-outline-primary.btn-sm(type='button' name='opinion#{index}') This article is actually legit
+                        button.btn.btn-outline-danger.btn-sm(type='button' name='opinion#{index}') Agreed. It's fake
