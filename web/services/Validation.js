@@ -211,15 +211,15 @@ var articles = [
         title: 'Chefe da Guarda Civil de SP diz que bairro é só um dos fatores que influenciam abordagens policiais',
         desc: ' Em um debate sobre como as autoridades policiais devem se dirigir às pessoas nas ruas, o comandante geral da GCM (Guarda Civil Metropolitana) de São Paulo, Adelson de Souza, disse que "cada abordagem é diferente" -- e o local da cidade onde ela acontece não pode ser determinante para uma ação policial diferenciada.',
         url: 'http://cnnn.com/news/1',
-        imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg',
+        imgCloud:'https://storage.googleapis.com/fakenews_hackaton/police.jpg',
         imgUrl: 'https://conteudo.imguol.com.br/c/noticias/67/2017/11/08/08nov2017---comandante-geral-da-gcm-de-sp-adelson-de-souza-1510158156286_300x420.jpg',
         originUrl:'https://noticias.uol.com.br/cotidiano/ultimas-noticias/2017/11/08/comandante-da-guarda-civil-de-sao-paulo-diz-que-bairro-de-um-dos-fatores-que-influenciam-abordagens-policiais.htm'
     },    
     {
-        title: 'A chocante foto de elefantes em chamas premiada em concurso!!!!',
-        desc: 'A imagem de dois elefantes fugindo de uma multidão que ateava fogo neles foi escolhida como a vencedora de um prêmio de fotografia da vida selvagem.',
+        title: 'A chocante foto de elefantes em chamas premiada em concurso',
+        desc: 'A imagem de dois elefantes fugindo de uma multidão que ateava fogo neles foi escolhida como a vencedora de um prêmio de fotografia da vida selvagem. elephant',
         url: 'http://cnnn.com/news/1',
-        imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg',
+        imgCloud:'https://storage.googleapis.com/fakenews_hackaton/elefante.jpg',
         imgUrl: 'https://conteudo.imguol.com.br/c/noticias/3c/2017/11/08/a-imagem-de-dois-elefantes-fugindo-de-uma-multidao-que-ateava-fogo-neles-foi-escolhida-como-a-vencedora-de-um-premio-de-fotografia-da-vida-selvagem-1510158759882_615x300.jpg',
         originUrl:'https://noticias.uol.com.br/meio-ambiente/ultimas-noticias/bbc/2017/11/08/a-chocante-foto-de-elefantes-em-chamas-premiada-em-concurso.htm'
     }
