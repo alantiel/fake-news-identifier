@@ -17,8 +17,7 @@ block content
                     .progress(style='margin-top: 10px')
                         .progress-bar.bg-danger(role='progressbar',
                             style='width: #{article.score}%', aria-valuenow='#{article.score}', 
-                            aria-valuemin='0', aria-valuemax='100')
-                            | Fake-o-meter: #{article.score}%
+                            aria-valuemin='0', aria-valuemax='100') #{article.score}%
                     .btn-group(role='group', aria-label='Basic example', style="margin-top: 15px; float: right")
                         button.btn.btn-outline-primary.btn-sm(type='button' name='opinion#{index}') This article is actually legit
                         button.btn.btn-outline-danger.btn-sm(type='button' name='opinion#{index}') Agreed. It's fake
