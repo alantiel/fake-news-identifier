@@ -274,6 +274,38 @@ var validationJoke = function(url){
 }
 
 
+var validateDate = function(article) {
+	let title = article.title;
+
+	//const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go'; // alan
+	const G_API_KEY = 'AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY'; //makoto
+	const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
+	//const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8'; //alan
+	const G_CX_WHITELIST = '000736769589540582836:fcooc21yaqq'; //makoto
+
+	let res = request('GET', G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
+
+	let items = JSON.parse(res.getBody('utf8')).items;
+
+	let resSize = items.filter(function(item){
+		return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
+	}).filter(function(item){
+		diff = new Diff(item.title, title);
+		lcs = diff.getLcs();
+
+		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
+	}).filter(function(item) {
+		let articleDate = new Date(article.date);
+		let limitDays = 7;
+		let itemDate = new Date(item.pagemap.newsarticle[0].datepublished);
+		console.log(itemDate, articleDate, compareDates.add(articleDate, limitDays*-1, 'day'), compareDates.add(articleDate, limitDays, 'day'));
+		return compareDates.isBetween(itemDate, compareDates.add(articleDate, limitDays*-1, 'day'), compareDates.add(articleDate, limitDays, 'day'));
+	}).length;
+
+	
+	return {pass: resSize > 0};
+}
+
 var service = {
 	articles: function(){
 		    articles.forEach(function(article) {
