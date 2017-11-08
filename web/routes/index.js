@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 	article: article,
 	validationOne: { pass: true, contUpperWords: 0, contExclamationPoints: 0},
 	validationTwo: validateURL(article.url),
-	validationThree: {pass: true},
+	validationThree: validationThree(article.url),
 	validationFour: validateFormatting(article),
 	validationFive: {pass: true},
 	validationSix: {pass: true},
@@ -69,6 +69,21 @@ validateFormatting = function(article) {
 	});
 	
 	return { pass:(contWrorg < 2) , cont: contWrorg};
+}
+
+validationThree = function(url){
+
+	var whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
+	var blackList = [ 'bcc.com', 'cnm.com', 'nsm.com'];
+	var host = url.split("/")[2];
+
+	if(whiteList.indexOf(host) != -1){
+		return {pass:true}
+	}
+	if(blackList.indexOf(host) != -1){
+		return {pass:false}
+	}
+	return {pass: 'unknow'}
 }
 
 module.exports = router;
