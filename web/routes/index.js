@@ -12,18 +12,13 @@ const Diff = require('mdiff').Diff;
 
 router.get('/', function(req, res, next) {
   var article = {
-<<<<<<< HEAD
+
 	//title: 'WARNING: THIS IS FAKE!!',
 	title: 'In an Age of Fake News, a Historian of the Hoax - The New York Times',
 	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',
    url: 'http://cnnn.com/news/1',
-	date: 'Nov 6, 2017'
-=======
-	title: 'WARNING: THIS IS FAKE!!',
-	desc: 'Just more one fake text... Here is a misspled text too. True fake neus! geology',
-   url: 'http://cnnn.com/news/1',
-   img:'https://cloud.google.com/vision/images/rushmore.jpg'
->>>>>>> 0ffbcae71865354d313e0faf60fa414776c82de2
+	date: 'Nov 6, 2017',
+	img:'https://cloud.google.com/vision/images/rushmore.jpg'
   }
 
   res.render('index', { 
@@ -34,7 +29,7 @@ router.get('/', function(req, res, next) {
 	validationThree: validationThree(article.url),
 	validationFour: validateFormatting(article),
 	validationFive: validateImage(article),
-	validationSix: {pass:true},//validateDate(article),
+	validationSix: validateDate(article),
 	validationSeven: {pass: true},
 	validationEight: {pass: true},
 	validationNine: validationJoke(article.url),
