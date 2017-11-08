@@ -8,7 +8,7 @@ const dictionary = new Typo("en_US");
 const router = express.Router();
 
 const Diff = require('mdiff').Diff;
-
+const service = require("../services/Validation.js");
 
 router.get('/', function(req, res, next) {
   var article = {
@@ -24,15 +24,15 @@ router.get('/', function(req, res, next) {
   res.render('index', { 
 	title: 'Fake News Identifier',
 	article: article,
-	validationOne: validateHeadline(article.title),
-	validationTwo: validateURL(article.url),
-	validationThree: validationThree(article.url),
-	validationFour: validateFormatting(article),
-	validationFive: validateImage(article),
-	validationSix: validateDate(article),
+	validationOne: service.validateHeadline(article.title),
+	validationTwo: service.validateURL(article.url),
+	validationThree: service.validationThree(article.url),
+	validationFour: service.validateFormatting(article),
+	validationFive: service.validateImage(article),
+	validationSix: service.validateDate(article),
 	validationSeven: {pass: true},
 	validationEight: {pass: true},
-	validationNine: validationJoke(article.url),
+	validationNine: service.validationJoke(article.url),
 	validationTen: {pass: true}
   });
 
@@ -136,9 +136,11 @@ validationThree = function(url){
 validateDate = function(article) {
 	let title = article.title;
 
-	const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go';
+	//const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go'; // alan
+	const G_API_KEY = 'AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY'; //makoto
 	const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
-	const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8';
+	//const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8'; //alan
+	const G_CX_WHITELIST = '000736769589540582836:fcooc21yaqq'; //makoto
 
 	let res = request('GET', G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
 
@@ -162,47 +164,8 @@ validateDate = function(article) {
 	
 	return {pass: resSize > 0};
 }
-validateImage = function(article){
-	var res = request('POST', 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY', {
-		json: { 
-			"requests": [
-				{
-				  "image": {
-					"source": {
-					  "imageUri": article.imgCloud
-					}
-				  },
-				  "features": [
-					{
-					  "type": "LABEL_DETECTION",
-					  "maxResults": 10
-					}
-				  ]
-				}
-			  ]
-		}
-      });
-      
-	var jsonResult = JSON.parse(res.getBody('utf8'));
-	
-	var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
-		.filter((description) => article.desc.indexOf(description) !== -1);
 
-	console.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
-	console.log('matches:'+ filters)
-	var result = filters.length > 0
-	return { pass: result };
-}
 
-validationJoke = function(url){
-	var knowedDomains = ['thechive.com', 'cracked.com', 'break.com'];
-	var host = url.split("/")[2];
-	
-	if(knowedDomains.indexOf(host) != -1){
-		return { pass:false}
-	}	
-	return{ pass: true}
-}
 
 
 module.exports = router;

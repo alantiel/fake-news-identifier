@@ -2,6 +2,14 @@ const request = require('sync-request');
 const Typo = require('typo-js');
 const levenshtein = require('fast-levenshtein')
 const dictionary = new Typo("en_US");
+const compareDates = require('compare-dates');
+const Diff = require('mdiff').Diff;
+
+//const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go'; // alan
+const G_API_KEY = 'AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY'; //makoto
+const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
+//const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8'; //alan
+const G_CX_WHITELIST = '000736769589540582836:fcooc21yaqq'; //makoto
 
 function checkExclamationPointsRatio (article) {
 	return article.match(/!/g) ? article.match(/!/g).length : 0;
@@ -34,7 +42,7 @@ function checkSensationalismExpressionRatio (article) {
 	return senExprCount;
 }
 
-validateHeadline = function(title) {
+const validateHeadline = function(title) {
 	let exc = checkExclamationPointsRatio(title);
 	let upp = checkUpperCaseLettersRatio(title);
 	let sen = checkSensationalismExpressionRatio(title);
@@ -101,9 +109,8 @@ function validationThree(url){
 validateDate = function(article) {
 	let title = article.title;
 
-	const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go';
-	const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
-	const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8';
+	
+
 	const G_NUM_RETURN = '5';
 
 	let res = request('GET', G_ENDPOINT
@@ -134,6 +141,22 @@ validateDate = function(article) {
 	
 	return {pass: resSize > 0};
 }
+
+validationThree = function(url){
+
+	var whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
+	var blackList = [ 'bcc.com', 'cnm.com', 'nsm.com'];
+	var host = url.split("/")[2];
+
+	if(whiteList.indexOf(host) != -1){
+		return {pass:true}
+	}
+	if(blackList.indexOf(host) != -1){
+		return {pass:false}
+	}
+	return {pass: 'unknow'}
+}
+
 
 validateOtherSources = function(article) {
 	/*let title = article.title;
@@ -208,8 +231,52 @@ var articles = [
     }
 ]
 
-module.exports = function() {
-    articles.forEach(function(article) {
+var validateImage = function(article){
+	var res = request('POST', 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY', {
+		json: { 
+			"requests": [
+				{
+				  "image": {
+					"source": {
+					  "imageUri": article.imgCloud
+					}
+				  },
+				  "features": [
+					{
+					  "type": "LABEL_DETECTION",
+					  "maxResults": 10
+					}
+				  ]
+				}
+			  ]
+		}
+      });
+      
+	var jsonResult = JSON.parse(res.getBody('utf8'));
+	
+	var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
+		.filter((description) => article.desc.indexOf(description) !== -1);
+
+	console.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
+	console.log('matches:'+ filters)
+	var result = filters.length > 0
+	return { pass: result };
+}
+
+var validationJoke = function(url){
+       var knowedDomains = ['thechive.com', 'cracked.com', 'break.com'];
+       var host = url.split("/")[2];
+       
+       if(knowedDomains.indexOf(host) != -1){
+               return { pass:false}
+       }       
+       return{ pass: true}
+}
+
+
+var service = {
+	articles: function(){
+		    articles.forEach(function(article) {
         var validations = [];
         var isValidStep1 = validateHeadline(article.title);
         validations.push({step:1, valid: isValidStep1.pass});
@@ -246,4 +313,16 @@ module.exports = function() {
     });
     console.log(articles);
     return articles;
+	},
+	validateImage,
+	validateHeadline,
+	validateHeadline,
+	validateURL,
+	validationThree,
+	validateFormatting,
+	validateImage,
+	validateDate,
+	validationJoke
 }
+
+module.exports = service; 
