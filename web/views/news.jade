@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
 
-  p Welcome to #{title}
+  p Bem vindo ao #{title}
 
   div.card-deck
     each article in articles
@@ -13,6 +13,7 @@ block content
                 h4.card-title #{article.title}
                 p.card-text #{article.desc}
                 .progress
-                    .progress-bar.bg-success(role='progressbar', style='width: #{article.score}%', aria-valuenow='#{article.score}', aria-valuemin='0', aria-valuemax='100') #{article.score}% - Verificado
+                    .progress-bar.bg-danger(role='progressbar', style='width: #{article.score}%', aria-valuenow='#{article.score}', aria-valuemin='0', aria-valuemax='100')
+                        | Taxa fake: #{article.score}%
 
             

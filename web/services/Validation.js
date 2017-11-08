@@ -194,7 +194,7 @@ module.exports = function() {
         validations.push(isValidStep10)
 
         article['validations'] = validations;
-        article['score'] = validations.filter((validation) => validation.valid === true).length * 10;
+        article['score'] = 100 - validations.filter((validation) => validation.valid === true).length * 10;
     });
     console.log(articles);
     return articles;
