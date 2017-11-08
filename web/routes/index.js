@@ -14,21 +14,59 @@ router.get('/', function(req, res, next) {
 	imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg'
   }
 
+  var resHeadLine = service.validateHeadline(article.title);
+  var resURL = service.validateHeadline(article.title);
+  var resThree = service.validationThree(article.url);
+  var resFormatting = service.validateFormatting(article);
+  var resImage = {pass: true}; //service.validateImage(article)
+  var resDate = {pass: true};//service.validateDate(article)
+  var resSeven = {pass: true};
+  var resOtherSources = {pass: true}; //service.validateOtherSources(article)
+  var resJoke = service.validationJoke(article.url);
+  var resTen = {pass: true};
+
+  var answers = [resHeadLine, resURL, resThree, resFormatting, resImage, resDate, resSeven, resOtherSources, resJoke, resTen];
+
+
   res.render('index', { 
 	title: 'Fake News Identifier',
 	article: article,
-	validationOne: service.validateHeadline(article.title),
-	validationTwo: service.validateURL(article.url),
-	validationThree: service.validationThree(article.url),
-	validationFour: service.validateFormatting(article),
-	validationFive: {pass: true}, //service.validateImage(article),
-	validationSix: {pass: true},//service.validateDate(article),
-	validationSeven: {pass: true},
-	validationEight: {pass: true}, //service.validateOtherSources(article), 
-	validationNine: service.validationJoke(article.url),
-	validationTen: {pass: true}
+	validationOne: resHeadLine,
+	validationTwo: resURL,
+	validationThree: resThree,
+	validationFour: resFormatting,
+	validationFive: resImage,
+	validationSix: resDate,
+	validationSeven: resSeven,
+	validationEight: resOtherSources, 
+	validationNine: resJoke,
+	validationTen: resTen,
+	finalRate: finalRate(answers)
   });
 
 });
+
+finalRate = function(answers){
+	var vTrue = 0;
+	var vFalse = 0;
+	var vUnknow = 0;
+
+	answers.forEach(function(res){
+		switch(res.pass){
+			case true:
+				vTrue+=1;
+				break;
+			case false:
+				vFalse+=1;
+				break;
+			case 'unknow':
+				vUnknow+=1;
+				break;
+		}
+	})
+	var result = ((vTrue/answers.length)*100);
+	return " Final Rate = " + result.toFixed(2) + " %";
+}
+
 
 module.exports = router;
