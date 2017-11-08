@@ -150,6 +150,7 @@ var articles = [
         url: 'http://cnnn.com/news/1',
         imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg',
         imgUrl: 'https://conteudo.imguol.com.br/c/noticias/67/2017/11/08/08nov2017---comandante-geral-da-gcm-de-sp-adelson-de-souza-1510158156286_300x420.jpg',
+        originUrl:''
     },    
     {
         title: 'A chocante foto de elefantes em chamas premiada em concurso!!!!',
@@ -157,6 +158,7 @@ var articles = [
         url: 'http://cnnn.com/news/1',
         imgCloud:'https://cloud.google.com/vision/images/rushmore.jpg',
         imgUrl: 'https://conteudo.imguol.com.br/c/noticias/3c/2017/11/08/a-imagem-de-dois-elefantes-fugindo-de-uma-multidao-que-ateava-fogo-neles-foi-escolhida-como-a-vencedora-de-um-premio-de-fotografia-da-vida-selvagem-1510158759882_615x300.jpg',
+        originUrl:''
     }
 ]
 
