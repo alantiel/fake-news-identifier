@@ -10,8 +10,9 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   var article = {
 	title: 'WARNING: THIS IS FAKE!!',
-	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',
-   url: 'http://cnnn.com/news/1'
+	desc: 'Just more one fake text... Here is a misspled text too. True fake neus! geology',
+   url: 'http://cnnn.com/news/1',
+   img:'https://cloud.google.com/vision/images/rushmore.jpg'
   }
 
   res.render('index', { 
@@ -21,8 +22,8 @@ router.get('/', function(req, res, next) {
 	validationTwo: validateURL(article.url),
 	validationThree: validationThree(article.url),
 	validationFour: validateFormatting(article),
-	validationFive: {pass: true},
-	validationSix: validateDate(article),
+	validationFive: validateImage(article),
+	validationSix: {pass:true},//validateDate(article),
 	validationSeven: {pass: true},
 	validationEight: {pass: true},
 	validationNine: {pass: true},
@@ -140,5 +141,34 @@ validateDate = function(article) {
 	console.log(JSON.parse(res.getBody('utf8')))
 
 }
+validateImage = function(article){
+	var res = request('POST', 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY', {
+		json: { 
+			"requests": [
+				{
+				  "image": {
+					"source": {
+					  "imageUri": article.img
+					}
+				  },
+				  "features": [
+					{
+					  "type": "LABEL_DETECTION",
+					  "maxResults": 10
+					}
+				  ]
+				}
+			  ]
+		}
+	  });
+	var jsonResult = JSON.parse(res.getBody('utf8'));
+	
+	var filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
+		.filter((description) => article.desc.indexOf(description) !== -1);
 
+	console.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
+	console.log('matches:'+ filters)
+	var result = filters.length > 0
+	return {pass: result};
+}
 module.exports = router;
