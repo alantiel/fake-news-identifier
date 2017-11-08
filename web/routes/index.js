@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 	validationSix: {pass:true},//validateDate(article),
 	validationSeven: {pass: true},
 	validationEight: {pass: true},
-	validationNine: {pass: true},
+	validationNine: validationJoke(article.url),
 	validationTen: {pass: true}
   });
 
@@ -171,4 +171,16 @@ validateImage = function(article){
 	var result = filters.length > 0
 	return {pass: result};
 }
+
+validationJoke = function(url){
+	var knowedDomains = ['thechive.com', 'cracked.com', 'break.com'];
+	var host = url.split("/")[2];
+	
+	if(knowedDomains.indexOf(host) != -1){
+		return { pass:false}
+	}	
+	return{ pass: true}
+}
+
+
 module.exports = router;
