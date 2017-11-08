@@ -1,9 +1,10 @@
-var express = require('express');
-var Typo = require('typo-js');
-var levenshtein = require('fast-levenshtein')
-var dictionary = new Typo("en_US");
+const express = require('express');
+const request = require('sync-request');
+const Typo = require('typo-js');
+const levenshtein = require('fast-levenshtein')
+const dictionary = new Typo("en_US");
 
-var router = express.Router();
+const router = express.Router();
 
 
 router.get('/', function(req, res, next) {
@@ -21,7 +22,7 @@ router.get('/', function(req, res, next) {
 	validationThree: validationThree(article.url),
 	validationFour: validateFormatting(article),
 	validationFive: {pass: true},
-	validationSix: {pass: true},
+	validationSix: validateDate(article),
 	validationSeven: {pass: true},
 	validationEight: {pass: true},
 	validationNine: {pass: true},
@@ -121,6 +122,21 @@ validationThree = function(url){
 		return {pass:false}
 	}
 	return {pass: 'unknow'}
+}
+
+validateDate = function(article) {
+	let date = article.date;
+	let title = article.title;
+
+	const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go';
+	const G_ENDPOINT = 'https://www.googleapis.com/customsearch/v1';
+	const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8';
+
+	console.log(G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
+	let res = request('GET', G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
+
+	console.log(JSON.parse(res.getBody('utf8')))
+
 }
 
 module.exports = router;
