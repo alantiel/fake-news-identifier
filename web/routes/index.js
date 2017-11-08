@@ -1,5 +1,6 @@
 var express = require('express');
 var Typo = require('typo-js');
+var levenshtein = require('fast-levenshtein')
 var dictionary = new Typo("en_US");
 
 var router = express.Router();
@@ -8,16 +9,17 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   var article = {
 	title: 'WARNING: THIS IS FAKE!!',
-	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!'
+	desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',
+   url: 'http://cnnn.com/news/1'
   }
 
   res.render('index', { 
 	title: 'Fake News Identifier',
 	article: article,
 	validationOne: { pass: true, contUpperWords: 0, contExclamationPoints: 0},
-	validationTwo: {pass: true},
+	validationTwo: validateURL(article.url),
 	validationThree: {pass: true},
-	validationFour: validationFour(article),
+	validationFour: validateFormatting(article),
 	validationFive: {pass: true},
 	validationSix: {pass: true},
 	validationSeven: {pass: true},
@@ -32,14 +34,31 @@ validationOne = function(article) {
 	return 0;
 }
 
-validationFour = function(article) {
+validateURL = function(url) {
+	var whiteList = ['cnn.com', 'nytimes.com'];
+
+	var host = url.split("/")[2];
+
+	var closestDistance = 5, closestURL;
+	var pass = true;
+	
+	whiteList.forEach(function(itemURL) {
+		var distance = levenshtein.get(itemURL, host);
+		console.log(itemURL, url, distance);
+		if(distance > 0 && distance < 3 && distance < closestDistance) {
+			closestDistance = distance;
+			closestURL = itemURL;
+			pass = false;
+		}
+	});
+	
+	return {pass: pass, url: closestURL}
+}
+
+validateFormatting = function(article) {
 	var keywords = article.title.match(/\b(\w+)\b/g).concat(article.desc.match(/\b(\w+)\b/g))
 	var contWrorg = 0;
 
-	console.log(dictionary.check("misspelled"));
-
-	console.log(dictionary.check("mispelled"));
-	console.log(dictionary.suggest("misspled"));
 
 	keywords.forEach(function(element) {
 		console.log(element, dictionary.check(element));

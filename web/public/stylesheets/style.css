@@ -1,3 +1,7 @@
 [data-pass="false"] {
   background-color: #f00;
 }
+
+[data-pass="unknow"] {
+  background-color: #ff0;
+}
