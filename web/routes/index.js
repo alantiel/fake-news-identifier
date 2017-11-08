@@ -32,12 +32,12 @@ router.get('/', function(req, res, next) {
 });
 
 function checkExclamationPointsRatio (article) {
-	return article.match(/!/g).length;
+	return article.match(/!/g) ? article.match(/!/g).length : 0;
 }
 
 function checkUpperCaseLettersRatio (article) {
-	let letters = article.match(/[A-z]/g).length;
-	let upperLetters = article.match(/[A-Z]/g).length;
+	let letters = article.match(/[A-z]/g) ? article.match(/[A-z]/g).length : 0;
+	let upperLetters = article.match(/[A-Z]/g) ? article.match(/[A-Z]/g).length : 0;
 
 	return upperLetters/letters;
 }
@@ -46,7 +46,9 @@ function checkSensationalismExpressionRatio (article) {
 	let sensationalExpressions = [
 		"you won't believe what happened", 
 		"check this out",
-		"oh my god"
+		"oh my god",
+		"warning!",
+		"danger!"
 	];
 
 	let senExprCount = 0;
@@ -69,7 +71,7 @@ validateHeadline = function(title) {
 	console.log("checkUpperCaseLettersRatio = " + upp);
 	console.log("checkSensationalismExpressionRatio = " + sen);
 
-	return 0;
+	return {pass: !(exc > 1 || upp > 0.3 || sen > 1)};
 }
 
 validateURL = function(url) {
