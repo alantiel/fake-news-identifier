@@ -93,7 +93,7 @@ validateURL = function(url) {
 	return { pass:(contWrorg < 2) , cont: contWrorg};
 }
 
-function validationThree(url){
+function validationReputation(url){
 
 	var whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
 	var blackList = [ 'bcc.com', 'cnm.com', 'nsm.com'];
@@ -142,7 +142,7 @@ validateDate = function(article) {
 	return {pass: resSize > 0};
 }
 
-validationThree = function(url){
+validationReputation = function(url){
 
 	var whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
 	var blackList = [ 'bcc.com', 'cnm.com', 'nsm.com','nationalreport.net'];
@@ -270,7 +270,7 @@ var validationJoke = function(url){
        if(knowedDomains.indexOf(host) != -1){
                return { pass:false}
        }       
-       return{ pass: true}
+       return{ pass: true, step: 9}
 }
 
 
@@ -316,7 +316,7 @@ var service = {
         var isValidStep2 = validateURL(article.url);
         validations.push({step:2, valid: isValidStep2.pass});
 
-        var isValidStep3 = validationThree(article.url);
+        var isValidStep3 = validationReputation(article.url);
         validations.push({step:3, valid: isValidStep3.pass});
       
         var isValidStep4 = validateFormatting(article);
@@ -326,20 +326,16 @@ var service = {
         validations.push({step:5, valid: isValidStep5.pass})
    
 		var isValidStep6 = validateDate(article);
-		isValidStep6['valid'] = isValidStep6.pass;
-        validations.push(isValidStep6)
+        validations.push({step:6, valid: isValidStep6.pass})
 
         var isValidStep7 = {step:7, valid: true};
         validations.push(isValidStep7)
 
 		var isValidStep8 = validateOtherSources(article);
-		isValidStep8['valid'] = isValidStep8.pass;
-        validations.push(isValidStep8);
+        validations.push({step:8, valid: isValidStep8.pass});
 
 		var isValidStep9 = validationJoke(article.url);
-		isValidStep9['valid'] = isValidStep9.pass;
-		isValidStep9['step9'] = 'step9';
-        validations.push(isValidStep9)
+        validations.push({step:8, valid: isValidStep9.pass})
 
         var isValidStep10 = {step:10, valid: true};
         validations.push(isValidStep10)
@@ -356,9 +352,8 @@ var service = {
 	},
 	validateImage,
 	validateHeadline,
-	validateHeadline,
 	validateURL,
-	validationThree,
+	validationReputation,
 	validateFormatting,
 	validateImage,
 	validateDate,
