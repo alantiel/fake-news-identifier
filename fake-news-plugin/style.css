@@ -1,0 +1,12 @@
+.player-container-container-text {
+   text-align: center;
+   bottom: 60px;
+   position: absolute;
+   width: 100%;
+   z-index: 1000000000000;
+}
+.player-container-text {
+   background: rgba(0, 0, 0, .5);
+   color: white;
+   font-size: 20px;
+}

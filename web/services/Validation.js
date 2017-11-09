@@ -202,7 +202,7 @@ validateOtherSources = function(article) {
 		return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
 	}).length;
 
-   return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? 'false' : 'unknow', step:8}; 
+   return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? false : 'unknow', step:8}; 
     
 }
 
@@ -349,7 +349,7 @@ var service = {
 		});
 		
         article['validations'] = validations;
-        article['score'] = validations.filter((validation) => validation.valid === false ).length * 10;
+        article['score'] = validations.filter((validation) => validation.valid === false || validation.valid === 'false' ).length * 10;
     });
     console.log(articles);
     return articles;

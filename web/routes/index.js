@@ -18,15 +18,12 @@ router.get('/', function(req, res, next) {
   var resURL = service.validateHeadline(article.title);
   var resThree = service.validationThree(article.url);
   var resFormatting = service.validateFormatting(article);
-  var resImage = {pass: true}; //service.validateImage(article)
-  var resDate = {pass: true};//service.validateDate(article)
+  var resImage = service.validateImage(article)
+  var resDate = service.validateDate(article)
   var resSeven = {pass: true};
-  var resOtherSources = {pass: true}; //service.validateOtherSources(article)
+  var resOtherSources = service.validateOtherSources(article)
   var resJoke = service.validationJoke(article.url);
   var resTen = {pass: true};
-
-  var answers = [resHeadLine, resURL, resThree, resFormatting, resImage, resDate, resSeven, resOtherSources, resJoke, resTen];
-
 
   res.render('index', { 
 	title: 'Fake News Identifier',
@@ -41,7 +38,7 @@ router.get('/', function(req, res, next) {
 	validationEight: resOtherSources, 
 	validationNine: resJoke,
 	validationTen: resTen,
-	finalRate: finalRate(answers)
+	finalRate: service.articles()[1].score
   });
 
 });
@@ -64,7 +61,7 @@ finalRate = function(answers){
 				break;
 		}
 	})
-	var result = ((vTrue/answers.length)*100);
+	var result = ((vFalse  + vUnknow* 0.5)/answers.length) * 10;
 	return " Final Rate = " + result.toFixed(2) + " %";
 }
 
