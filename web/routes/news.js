@@ -1,5 +1,8 @@
 const express = require('express');
-const validationService = require('../services/Validation');
+const validator = require('../services/Validator');
+
+const articles = require('../input/articles').sample;
+
 const router = express.Router();
 const logger = console || {
     log: () => {},
@@ -9,11 +12,13 @@ const logger = console || {
 };
 
 router.get('/', (req, res) => {
-    const articles = validationService.articles();
-    logger.log(articles);
+	const allArtiles = articles;
+
+	const validationResponse = validator.validate(allArtiles);
+
     res.render('news', { 
         title: 'Fake-o-meter',
-        articles
+        articles: validationResponse
     });
 });
 
