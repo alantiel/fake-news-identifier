@@ -25,14 +25,14 @@ function checkExclamationPointsRatio (article) {
 }
 
 function checkUpperCaseLettersRatio (article) {
-    let letters = article.match(/[A-z]/g) ? article.match(/[A-z]/g).length : 0;
-    let upperLetters = article.match(/[A-Z]/g) ? article.match(/[A-Z]/g).length : 0;
+    const letters = article.match(/[A-z]/g) ? article.match(/[A-z]/g).length : 0;
+    const upperLetters = article.match(/[A-Z]/g) ? article.match(/[A-Z]/g).length : 0;
 
     return upperLetters/letters;
 }
 
 function checkSensationalismExpressionRatio (article) {
-    let sensationalExpressions = [
+    const sensationalExpressions = [
         'you won\'t believe what happened', 
         'check this out',
         'oh my god',
@@ -42,7 +42,7 @@ function checkSensationalismExpressionRatio (article) {
 
     let senExprCount = 0;
     sensationalExpressions.forEach(function(exp) {
-        let matched = article.match(new RegExp(exp, 'i'));
+        const matched = article.match(new RegExp(exp, 'i'));
         if (matched) {
             senExprCount++;
         }
@@ -52,9 +52,9 @@ function checkSensationalismExpressionRatio (article) {
 }
 
 const validateHeadline = function(title) {
-    let exc = checkExclamationPointsRatio(title);
-    let upp = checkUpperCaseLettersRatio(title);
-    let sen = checkSensationalismExpressionRatio(title);
+    const exc = checkExclamationPointsRatio(title);
+    const upp = checkUpperCaseLettersRatio(title);
+    const sen = checkSensationalismExpressionRatio(title);
     logger.log('Title = ' + title);
     logger.log('checkExclamationPointsRatio = ' + exc);
     logger.log('checkUpperCaseLettersRatio = ' + upp);
@@ -64,15 +64,15 @@ const validateHeadline = function(title) {
 };
 
 const validateURL = function(url) {
-    let whiteList = ['cnn.com', 'nytimes.com'];
+    const whiteList = ['cnn.com', 'nytimes.com'];
 
-    let host = url.split('/')[2];
+    const host = url.split('/')[2];
 
     let closestDistance = 5, closestURL;
     let pass = true;
 	
     whiteList.forEach(function(itemURL) {
-        let distance = levenshtein.get(itemURL, host);
+        const distance = levenshtein.get(itemURL, host);
         logger.log(itemURL, url, distance);
         if(distance > 0 && distance < 3 && distance < closestDistance) {
             closestDistance = distance;
@@ -85,7 +85,7 @@ const validateURL = function(url) {
 };
 
 function validateFormatting(article) {
-    let keywords = article.title.match(/\b(\w+)\b/g).concat(article.desc.match(/\b(\w+)\b/g));
+    const keywords = article.title.match(/\b(\w+)\b/g).concat(article.desc.match(/\b(\w+)\b/g));
     let contWrorg = 0;
 
 
@@ -102,9 +102,9 @@ function validateFormatting(article) {
 
 const validationReputation = function(url){
 
-    let whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
-    let blackList = [ 'bcc.com', 'cnm.com', 'nsm.com','nationalreport.net'];
-    let host = url.split('/')[2];
+    const whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
+    const blackList = [ 'bcc.com', 'cnm.com', 'nsm.com','nationalreport.net'];
+    const host = url.split('/')[2];
 
     if(whiteList.indexOf(host) != -1){
         return {pass:true};
@@ -117,11 +117,11 @@ const validationReputation = function(url){
 
 
 const validateOtherSources = function(article) {
-    let title = article.title;
+    const title = article.title;
 
     const G_NUM_RETURN = '5';
 
-    let resWhitelist = request('GET', G_ENDPOINT
+    const resWhitelist = request('GET', G_ENDPOINT
         .concat('?key=')
         .concat(G_API_KEY)
         .concat('&cx=')
@@ -131,15 +131,15 @@ const validateOtherSources = function(article) {
         .concat('&q=')
         .concat(article.title));
 
-    let whitelistItems = JSON.parse(resWhitelist.getBody('utf8')).items;
+    const whitelistItems = JSON.parse(resWhitelist.getBody('utf8')).items;
 
-    let resWhitelistSize = whitelistItems.filter(function(item){
-        let diff = new Diff(item.title.toUpperCase(), title.toUpperCase());
-        let lcs = diff.getLcs();
+    const resWhitelistSize = whitelistItems.filter(function(item){
+        const diff = new Diff(item.title.toUpperCase(), title.toUpperCase());
+        const lcs = diff.getLcs();
         return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
     }).length;
 
-    let resBlacklist = request('GET', G_ENDPOINT
+    const resBlacklist = request('GET', G_ENDPOINT
         .concat('?key=')
         .concat(G_API_KEY)
         .concat('&cx=')
@@ -149,12 +149,12 @@ const validateOtherSources = function(article) {
         .concat('&q=')
         .concat(article.title));
 
-    let blacklistResponse = JSON.parse(resBlacklist.getBody('utf8'));
-    let blacklistItems = blacklistResponse.items || [];
+    const blacklistResponse = JSON.parse(resBlacklist.getBody('utf8'));
+    const blacklistItems = blacklistResponse.items || [];
 
-    let resBlacklistSize = blacklistItems.filter(function(item){
-        let diff = new Diff(item.title.toUpperCase(), title.toUpperCase());
-        let lcs = diff.getLcs();
+    const resBlacklistSize = blacklistItems.filter(function(item){
+        const diff = new Diff(item.title.toUpperCase(), title.toUpperCase());
+        const lcs = diff.getLcs();
         logger.log('f0', item.title, title);
         logger.log('f2', lcs.length >= 0.8 * Math.min(item.title.length, title.length));
         return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
@@ -185,7 +185,7 @@ const articles = [
 ];
 
 const validateImage = function(article){
-    let res = request('POST', 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY', {
+    const res = request('POST', 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY', {
         json:{
             'requests': [
                 {
@@ -205,15 +205,15 @@ const validateImage = function(article){
         }
     });
 
-    let jsonResult = JSON.parse(res.getBody('utf8'));
+    const jsonResult = JSON.parse(res.getBody('utf8'));
 	
     if(jsonResult.responses[0].labelAnnotations){
-        let filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
+        const filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
             .filter((description) => article.desc.indexOf(description) !== -1);
 
         logger.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
         logger.log('matches:'+ filters);
-        let result = filters.length > 0;
+        const result = filters.length > 0;
         return { pass: result };
     }else{
         return { pass:false };
@@ -221,9 +221,9 @@ const validateImage = function(article){
 
 };
 
-let validationJoke = function(url){
-    let knowedDomains = ['thechive.com', 'cracked.com', 'break.com'];
-    let host = url.split('/')[2];
+const validationJoke = function(url){
+    const knowedDomains = ['thechive.com', 'cracked.com', 'break.com'];
+    const host = url.split('/')[2];
        
     if(knowedDomains.indexOf(host) != -1){
         return { pass:false};
@@ -233,7 +233,7 @@ let validationJoke = function(url){
 
 
 const validateDate = function(article) {
-    let title = article.title;
+    const title = article.title;
 
     //const G_API_KEY = 'AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go'; // alan
     const G_API_KEY = 'AIzaSyC-A5v-Ni-5DEUeByv0ASTqIDzSedbVnVY'; //makoto
@@ -241,21 +241,21 @@ const validateDate = function(article) {
     //const G_CX_WHITELIST = '008799506537989115616:9mdr3jf9dm8'; //alan
     const G_CX_WHITELIST = '000736769589540582836:fcooc21yaqq'; //makoto
 
-    let res = request('GET', G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
+    const res = request('GET', G_ENDPOINT.concat('?key=').concat(G_API_KEY).concat('&cx=').concat(G_CX_WHITELIST).concat('&q=').concat(article.title));
 
-    let items = JSON.parse(res.getBody('utf8')).items;
+    const items = JSON.parse(res.getBody('utf8')).items;
 
-    let resSize = items.filter(function(item){
+    const resSize = items.filter(function(item){
         return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
     }).filter(function(item){
-        let diff = new Diff(item.title, title);
-        let lcs = diff.getLcs();
+        const diff = new Diff(item.title, title);
+        const lcs = diff.getLcs();
 
         return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
     }).filter(function(item) {
-        let articleDate = new Date(article.date);
-        let limitDays = 7;
-        let itemDate = new Date(item.pagemap.newsarticle[0].datepublished);
+        const articleDate = new Date(article.date);
+        const limitDays = 7;
+        const itemDate = new Date(item.pagemap.newsarticle[0].datepublished);
         logger.log(itemDate, articleDate, compareDates.add(articleDate, limitDays*-1, 'day'), compareDates.add(articleDate, limitDays, 'day'));
         return compareDates.isBetween(itemDate, compareDates.add(articleDate, limitDays*-1, 'day'), compareDates.add(articleDate, limitDays, 'day'));
     }).length;
@@ -268,35 +268,35 @@ const validateDate = function(article) {
 module.exports = {
     articles: function(){
         articles.forEach(function(article) {
-            let validations = [];
-            let isValidStep1 = validateHeadline(article.title);
+            const validations = [];
+            const isValidStep1 = validateHeadline(article.title);
             validations.push({step:1, valid: isValidStep1.pass});
 
-            let isValidStep2 = validateURL(article.url);
+            const isValidStep2 = validateURL(article.url);
             validations.push({step:2, valid: isValidStep2.pass});
 
-            let isValidStep3 = validationReputation(article.url);
+            const isValidStep3 = validationReputation(article.url);
             validations.push({step:3, valid: isValidStep3.pass});
 
-            let isValidStep4 = validateFormatting(article);
+            const isValidStep4 = validateFormatting(article);
             validations.push({step:4, valid: isValidStep4.pass});
 
-            let isValidStep5 = validateImage(article);
+            const isValidStep5 = validateImage(article);
             validations.push({step:5, valid: isValidStep5.pass});
 
-            let isValidStep6 = validateDate(article);
+            const isValidStep6 = validateDate(article);
             validations.push({step:6, valid: isValidStep6.pass});
 
-            let isValidStep7 = {step:7, valid: true};
+            const isValidStep7 = {step:7, valid: true};
             validations.push(isValidStep7);
 
-            let isValidStep8 = validateOtherSources(article);
+            const isValidStep8 = validateOtherSources(article);
             validations.push({step:8, valid: isValidStep8.pass});
 
-            let isValidStep9 = validationJoke(article.url);
+            const isValidStep9 = validationJoke(article.url);
             validations.push({step:8, valid: isValidStep9.pass});
 
-            let isValidStep10 = {step:10, valid: true};
+            const isValidStep10 = {step:10, valid: true};
             validations.push(isValidStep10);
 
             validations.forEach((validation)=>{

@@ -26,8 +26,9 @@
             "error",
             "always"
         ],
-        "no-var": [
-	    "error"
-	]
+        "prefer-const": ["error", {
+            "destructuring": "all",
+            "ignoreReadBeforeAssign": false
+        }]
     }
 }
