@@ -1,7 +1,3 @@
-## https://www.andreagrandi.it/2013/02/24/using-twitter-bootstrap-with-node-js-express-and-jade/
-## Google API key = AIzaSyB_LG4vUd3N38WsJ2PVTeOF8MBunWcs9Go
-## Google cx (portais) = 008799506537989115616:9mdr3jf9dm8
-
 extends layout
 
 block content
@@ -13,8 +9,8 @@ block content
     div.card
       div#headingOne.card-header(role="tab", data-pass="#{validationOne.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseOne", aria-expanded="false", aria-controls="collapseOne")
-            [1] &nbsp;Be skeptical of headlines.
+          span.badge 1
+          a(data-toggle="collapse", href="#collapseOne", aria-expanded="false", aria-controls="collapseOne") Be skeptical of headlines.
 
       div#collapseOne.collapse(role="tabpanel", aria-labelledby="headingOne", data-parent="#accordion")
         div.card-body
@@ -23,8 +19,8 @@ block content
     div.card
       div#headingTwo.card-header(role="tab", data-pass="#{validationTwo.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseTwo", aria-expanded="false", aria-controls="collapseTwo")
-            [2] &nbsp;Look closely at the URL.
+          span.badge 2
+          a(data-toggle="collapse", href="#collapseTwo", aria-expanded="false", aria-controls="collapseTwo") Look closely at the URL.
 
       div#collapseTwo.collapse(role="tabpanel", aria-labelledby="headingTwo", data-parent="#accordion")
         div.card-body
@@ -33,8 +29,8 @@ block content
      div.card
       div#headingThree.card-header(role="tab", data-pass="#{validationThree.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseThree", aria-expanded="false", aria-controls="collapseThree")
-            [3] &nbsp;Investigate the source.
+          span.badge 3
+          a(data-toggle="collapse", href="#collapseThree", aria-expanded="false", aria-controls="collapseThree") Investigate the source.
 
       div#collapseThree.collapse(role="tabpanel", aria-labelledby="headingThree", data-parent="#accordion")
         div.card-body
@@ -43,8 +39,8 @@ block content
      div.card
       div#headingFour.card-header(role="tab", data-pass="#{validationFour.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseFour", aria-expanded="false", aria-controls="collapseFour")
-            [4] &nbsp;Watch for unusual formatting.
+          span.badge 4
+          a(data-toggle="collapse", href="#collapseFour", aria-expanded="false", aria-controls="collapseFour") Watch for unusual formatting.
 
       div#collapseFour.collapse(role="tabpanel", aria-labelledby="headingFour", data-parent="#accordion")
         div.card-body
@@ -53,8 +49,8 @@ block content
      div.card
       div#headingFive.card-header(role="tab", data-pass="#{validationFive.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseFive", aria-expanded="false", aria-controls="collapseFive")
-            [5] &nbsp;Consider the photos.
+          span.badge 5
+          a(data-toggle="collapse", href="#collapseFive", aria-expanded="false", aria-controls="collapseFive") Consider the photos.
 
       div#collapseFive.collapse(role="tabpanel", aria-labelledby="headingFive", data-parent="#accordion")
         div.card-body
@@ -63,8 +59,8 @@ block content
      div.card
       div#headingSix.card-header(role="tab", data-pass="#{validationSix.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseSix", aria-expanded="false", aria-controls="collapseSix")
-            [6] &nbsp;Inspect the dates.
+          span.badge 6
+          a(data-toggle="collapse", href="#collapseSix", aria-expanded="false", aria-controls="collapseSix") Inspect the dates.
 
       div#collapseSix.collapse(role="tabpanel", aria-labelledby="headingSix", data-parent="#accordion")
         div.card-body
@@ -73,8 +69,8 @@ block content
      div.card
       div#headingSeven.card-header(role="tab", data-pass="#{validationSeven.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseSeven", aria-expanded="false", aria-controls="collapseSeven")
-            [7] &nbsp;Check the evidence.
+          span.badge 7
+          a(data-toggle="collapse", href="#collapseSeven", aria-expanded="false", aria-controls="collapseSeven") Check the evidence.
 
       div#collapseSeven.collapse(role="tabpanel", aria-labelledby="headingSeven", data-parent="#accordion")
         div.card-body
@@ -83,8 +79,8 @@ block content
      div.card
       div#headingEight.card-header(role="tab", data-pass="#{validationEight.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseEight", aria-expanded="false", aria-controls="collapseEight")
-            [8] &nbsp;Look at other reports.
+          span.badge 8
+          a(data-toggle="collapse", href="#collapseEight", aria-expanded="false", aria-controls="collapseEight") Look at other reports.
 
       div#collapseEight.collapse(role="tabpanel", aria-labelledby="headingEight", data-parent="#accordion")
         div.card-body
@@ -93,8 +89,8 @@ block content
      div.card
       div#headingNine.card-header(role="tab", data-pass="#{validationNine.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseNine", aria-expanded="false", aria-controls="collapseNine")
-            [9] &nbsp;Is the story a joke?
+          span.badge 9
+          a(data-toggle="collapse", href="#collapseNine", aria-expanded="false", aria-controls="collapseNine") Is the story a joke?
 
       div#collapseNine.collapse(role="tabpanel", aria-labelledby="headingNine", data-parent="#accordion")
         div.card-body
@@ -103,8 +99,8 @@ block content
      div.card
       div#headingTen.card-header(role="tab", data-pass="#{validationTen.valid}")
         h5.mb-0
-          a(data-toggle="collapse", href="#collapseTen", aria-expanded="false", aria-controls="collapseTen")
-            [10] Some stories are intentionally false.
+          span.badge 10
+          a(data-toggle="collapse", href="#collapseTen", aria-expanded="false", aria-controls="collapseTen") Some stories are intentionally false.
 
       div#collapseTen.collapse(role="tabpanel", aria-labelledby="headingTen", data-parent="#accordion")
         div.card-body

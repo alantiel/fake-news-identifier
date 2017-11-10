@@ -30,7 +30,7 @@ module.exports = {
 
             //const isValidStep5 = ValidateImage.validate(article);
             //validations.push({step:5, valid: isValidStep5.pass}); // TODO descomentar e apagar a linha abaixo
-			validations.push({step:5, valid: true});
+			validations.push({step:5, valid: 'unknow'});
 
             //const isValidStep6 = ValidateDate.validate(article); 
             //validations.push({step:6, valid: isValidStep6.pass}); // TODO descomentar e apagar a linha abaixo

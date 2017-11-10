@@ -7,7 +7,8 @@ const articles = require('../input/articles').sample;
 router.get('/', (req, res) => {
 
 	const fakeArticle = articles[1]; // real article = [0]
-	const validations = validator.validate([fakeArticle])[0].validations;
+	const responseValidations = validator.validate([fakeArticle])[0];
+	const validations = responseValidations.validations;
   
 	const resHeadLine = validations[0];
 	const resURL = validations[1];
@@ -33,7 +34,7 @@ router.get('/', (req, res) => {
         validationEight: resOtherSources, 
         validationNine: resJoke,
         validationTen: resTen,
-        finalRate: fakeArticle.score
+        finalRate: 'probability of be fake: '.concat(responseValidations.score).concat('%')
     });
 
 });
