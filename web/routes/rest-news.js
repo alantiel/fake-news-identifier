@@ -1,14 +1,18 @@
-var express = require('express');
-var validationService = require('../services/Validation');
-var router = express.Router();
+const express = require('express');
+const validationService = require('../services/Validation');
+const router = express.Router();
  
-router.get('/', function(req, res, next) {
-    var url = req.query.url;
+router.get('/', (req, res) => {
+    const url = req.query.url;
     
-    var articles = validationService.articles();
-    var score = articles.filter(article => article.originUrl === url)
-    .map(article => article.score)
-    score = score.length > 0 ? score[0] : 0;
+    const articles = validationService.articles();
+    
+    const scores = articles
+        .filter(article => article.originUrl === url)
+        .map(article => article.score);
+
+    const score = scores.length > 0 ? scores[0] : 0;
+
     res.send({
         score: score
     });
