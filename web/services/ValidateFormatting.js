@@ -14,7 +14,7 @@ function validateFormatting(article) {
         }
     });
 	
-    return { pass:(contWrorg < 2) , cont: contWrorg};
+    return { pass:(contWrorg < 2) ? 'true' : (contWrorg == 2) ? 'unknown' : 'false' , cont: contWrorg};
 }
 
 module.exports = {

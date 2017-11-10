@@ -21,6 +21,8 @@ router.get('/', (req, res) => {
 	const resJoke = validations[8];
 	const resTen = validations[9];
 
+	console.log("teste", responseValidations.countFalse);
+
     res.render('index', { 
         title: 'Fake News Identifier',
         article: fakeArticle,
@@ -34,7 +36,10 @@ router.get('/', (req, res) => {
         validationEight: resOtherSources, 
         validationNine: resJoke,
         validationTen: resTen,
-        finalRate: 'probability of be fake: '.concat(responseValidations.score).concat('%')
+		countFalse: responseValidations.countFalse,
+		countTrue: responseValidations.countTrue,
+		countUnknown: responseValidations.countUnknown,
+        finalRate: 'probability of being fake news: '.concat(responseValidations.score).concat('%')
     });
 
 });

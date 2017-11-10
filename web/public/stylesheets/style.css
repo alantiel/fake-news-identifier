@@ -16,12 +16,12 @@
   color: #a94442;
 }
 
-[data-pass="unknow"] {
+[data-pass="unknown"] {
   color: #8a6d3b;
   background-color: #fcf8e3;
 }
 
-[data-pass="unknow"] a {
+[data-pass="unknown"] a {
   color: #8a6d3b;
 }
 
@@ -34,3 +34,19 @@
   color: #3c763d;
 }
 
+.progress {
+	width: 400px;
+	float: right;
+}
+
+.progress-bar-success {
+    background-color: #5cb85c;
+}
+
+.progress-bar-warning {
+    background-color: #f0ad4e;
+}
+
+.progress-bar-danger {
+    background-color: #d9534f;
+}

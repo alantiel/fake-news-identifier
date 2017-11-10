@@ -3,7 +3,17 @@ extends layout
 block content
   h1= title
 
-  p Welcome to #{title} / #{finalRate}
+  div Welcome to #{title} / #{finalRate}
+    div.progress
+      div.progress-bar.progress-bar-danger(style="width: #{countFalse}0%")
+        span.sr-only 40% Invalid points
+
+      div.progress-bar.progress-bar-warning(style="width: #{countUnknown}0%")
+        span.sr-only 10% Unknow points
+
+      div.progress-bar.progress-bar-success(style="width: #{countTrue}0%")
+        span.sr-only 50% Valid points
+
 
   div#accordion(role="tablist")
     div.card

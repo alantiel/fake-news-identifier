@@ -49,7 +49,7 @@ const validateOtherSources = function(article) {
         return lcs.length >= 0.8 * Math.min(item.title.length, title.length);
     }).length;
 
-    return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? false : 'unknow', step:8}; 
+    return {pass: (resWhitelistSize > 0 && resBlacklistSize == 0)? 'true' : (resWhitelistSize == 0 && resBlacklistSize > 0)? false : 'unknown', step:8}; 
     
 };
 

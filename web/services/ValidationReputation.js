@@ -10,7 +10,7 @@ const validationReputation = function(url){
     if(blackList.indexOf(host) != -1){
         return {pass:false};
     }
-    return {pass: 'unknow'};
+    return {pass: 'unknown'};
 };
 
 module.exports = {
