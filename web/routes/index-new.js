@@ -4,9 +4,9 @@ const validator = require('../services/Validator');
 
 const articles = require('../input/articles').sample;
 
-router.get('/', (req, res) => {
+router.get('/:idx', (req, res) => {
 
-	const fakeArticle = articles[0]; // real article = [0]
+	const fakeArticle = articles[req.params.idx]; // real article = [0]
 	const responseValidations = validator.validate([fakeArticle])[0];
 	const validations = responseValidations.validations;
   
@@ -21,8 +21,8 @@ router.get('/', (req, res) => {
 	const resJoke = validations[8];
 	const resTen = validations[9];
 
-	console.log("teste", responseValidations.countFalse);
-	
+	console.log(resHeadLine);
+	console.log(resURL);
 	  res.render('indexnew', { 
         title: 'Fake News Identifier',
         article: fakeArticle,
@@ -39,8 +39,10 @@ router.get('/', (req, res) => {
 		countFalse: responseValidations.countFalse,
 		countTrue: responseValidations.countTrue,
 		countUnknown: responseValidations.countUnknown,
-        finalRate: 'Probability of being fake news: '.concat(responseValidations.score).concat('%')
+        finalRate: 'Probability of being fake news: '.concat(responseValidations.score).concat('%'),
+        articles: articles
     });
+
 
 });
 

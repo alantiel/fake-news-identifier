@@ -28,10 +28,10 @@ module.exports = {
         articles.forEach(function(article) {
             const validations = [];
             const isValidStep1 = ValidateHeadline.validate(article.title);
-            validations.push({step:1, valid: isValidStep1.pass});
+            validations.push({step:1, valid: isValidStep1.pass, variables: isValidStep1.variables});
 
             const isValidStep2 = ValidateURL.validate(article.url);
-            validations.push({step:2, valid: isValidStep2.pass});
+            validations.push({step:2, valid: isValidStep2.pass, variables: isValidStep2.variables});
 
             const isValidStep3 = ValidationReputation.validate(article.url);
             validations.push({step:3, valid: isValidStep3.pass});
@@ -45,7 +45,7 @@ module.exports = {
 
             //const isValidStep6 = ValidateDate.validate(article); 
             //validations.push({step:6, valid: isValidStep6.pass}); // TODO descomentar e apagar a linha abaixo
-			validations.push({step:6, valid: false});
+			validations.push({step:6, valid: true});
 
             const isValidStep7 = {step:7, valid: true};
             validations.push(isValidStep7);

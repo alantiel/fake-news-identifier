@@ -2,7 +2,7 @@ const levenshtein = require('fast-levenshtein');
 const logger = require('../utils/Logger');
 
 const validateURL = function(url) {
-    const whiteList = ['cnn.com', 'nytimes.com'];
+    const whiteList = ['cnn.com', 'nytimes.com','nationalreport.net'];
 
     const host = url.split('/')[2];
 
@@ -18,8 +18,10 @@ const validateURL = function(url) {
             pass = false;
         }
     });
-	
-    return {pass: pass, url: closestURL};
+
+	const variables  ={whiteList: whiteList, host: host, closestDistance: closestDistance};
+
+    return {pass: pass, url: closestURL, variables: variables};
 };
 
 

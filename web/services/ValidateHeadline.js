@@ -39,8 +39,10 @@ const validateHeadline = function(title) {
     logger.log('checkExclamationPointsRatio = ' + exc);
     logger.log('checkUpperCaseLettersRatio = ' + upp);
     logger.log('checkSensationalismExpressionRatio = ' + sen);
+    
+    const variables = {exc: exc.toFixed(2), upp: upp.toFixed(2), sen: sen.toFixed(2)};
 
-    return {pass: !(exc > 1 || upp > 0.3 || sen > 1)};
+    return {pass: !(exc > 1 || upp > 0.3 || sen > 1), variables: variables};
 };
 
 module.exports = {
