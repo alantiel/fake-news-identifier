@@ -6,7 +6,7 @@ const articles = require('../input/articles').sample;
 
 router.get('/', (req, res) => {
 
-	const fakeArticle = articles[1]; // real article = [0]
+	const fakeArticle = articles[0]; // real article = [0]
 	const responseValidations = validator.validate([fakeArticle])[0];
 	const validations = responseValidations.validations;
   

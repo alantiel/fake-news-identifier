@@ -6,7 +6,8 @@ const articles = [
         imgCloud:'https://storage.googleapis.com/fakenews_hackaton/elefante.jpg',
         imgUrl: 'https://storage.googleapis.com/fakenews_hackaton/elefante.jpg',
         originUrl:'https://www.theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize'
-    },
+    }
+    ,
     {
         title: 'ALEX JONES SUGGESTS FLYING FALSE FLAG AT HALF-STAFF FOR TEXAS CHURCH SHOOTING VICTIMS',
         desc: 'Just more one fake text... Here is a misspled text too. True fake neus!',

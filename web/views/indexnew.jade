@@ -1,8 +1,12 @@
 extends layout
 
 block content
+	video.video(autoplay="true",loop="true")
+		source(src="/videos/Inbox-Zero.mp4", type="video/mp4")
+		source(src="/videos/Inbox-Zero.webm", type="video/webm")
+		source(src="/videos/Inbox-Zero.ogv", type="video/ogv")
 	br
-	div.container
+	div
 		h1.page-title= title
 	br
 
@@ -10,19 +14,25 @@ block content
 		div.content
 			div.row
 				div.col-lg-6.col-sm-6.col-xs-12
+					br
+					br
+					br
+					div
+						h1 #{finalRate}
+
+				div.col-lg-6.col-sm-6.col-xs-12
+					br
+					br
+					br
 					div.progress
 						div.progress-bar.progress-bar-danger(style="width: #{countFalse}0%")
-							span.sr-only 40% Invalid points
+						span.sr-only 40% Invalid points
 						div.progress-bar.progress-bar-warning(style="width: #{countUnknown}0%")
-							span.sr-only 10% Unknow points
+						span.sr-only 10% Unknow points
 						div.progress-bar.progress-bar-success(style="width: #{countTrue}0%")
-							span.sr-only 50% Valid points
-				div.col-lg-6.col-sm-6.col-xs-12
-					div #{finalRate}
-	br
+						span.sr-only 50% Valid points
 
-	div.container
-		div.content
+			hr
 			div.row
 				div.col-lg-4.col-sm-4.col-xs-12
 					h2 Be skeptical of headlines!
@@ -56,7 +66,7 @@ block content
 					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories may contain timelines that make no sense, or event dates that have been altered.") View details &raquo;
 
 
-				div.row
+			div.row
 				div.col-lg-4.col-sm-4.col-xs-12
 					h2 Check the evidence!
 					img.center.rounded-circle(width="110",height="110",data-pass="#{validationSeven.valid}")
@@ -72,12 +82,12 @@ block content
 					img.center.rounded-circle(width="110",height="110",data-pass="#{validationNine.valid}")
 					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Sometimes false news stories can be hard to distinguish from humor or satire. Check whether the source is known for parody, and whether the story's details and tone suggest it may be just for fun.") View details &raquo;
 
-			div.row.center
-				div.col-lg-12.col-sm-12.col-xs-12
+			div.row
+				div.col-lg-4.col-sm-4.col-xs-12
 					h2 Some stories are intentionally false.
 					img.center.rounded-circle(width="110",height="110",data-pass="#{validationTen.valid}")
 					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Think critically about the stories you read, and only share news that you know to be credible.") View details &raquo;
 
-			div.footer
+		div.footer
 			script.
 				$(function () {$('[data-toggle="popover"]').popover()})
