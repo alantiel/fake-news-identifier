@@ -4,12 +4,15 @@
 
 .badge {
   background-color: #fff;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 [data-pass="false"] {
   color: #a94442;
   background-color: #f2dede;
+  background-image: url('../images/sad.png');
+  /*background-image: url('../images/sad.gif');*/
+  background-size: cover;
 }
 
 [data-pass="false"] a {
@@ -18,7 +21,10 @@
 
 [data-pass="unknown"] {
   color: #8a6d3b;
-  background-color: #fcf8e3;
+  background-image: url('../images/indifferent.png');
+  /*background-image: url('../images/indifferent.gif');*/
+  background-size: cover;
+  background-color: #fcf8e3;  
 }
 
 [data-pass="unknown"] a {
@@ -27,6 +33,9 @@
 
 [data-pass="true"] {
   color: #3c763d;
+  background-image: url('../images/happy.png');
+  /*background-image: url('../images/happy.gif');*/
+  background-size: cover;
   background-color: #dff0d8;
 }
 
@@ -49,4 +58,33 @@
 
 .progress-bar-danger {
     background-color: #d9534f;
+}
+
+.page-title{
+  display: inline-block;
+  width: 100%;
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  color: rgba(0,0,0,0.6);
+  font-weight: 900;
+  background: rgb(65, 104, 173); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left,rgb(65, 104, 173),rgb(108, 182, 49)); /*Safari 5.1-6*/
+  background: -o-linear-gradient(right,rgb(65, 104, 173),rgb(108, 182, 49)); /*Opera 11.1-12*/
+  background: -moz-linear-gradient(right,rgb(65, 104, 173),rgb(108, 182, 49)); /*Fx 3.6-15*/
+  background: linear-gradient(to right, rgb(65, 104, 173), rgb(108, 182, 49)); /*Standard*/ 
+}
+.center{
+  display: block;
+  text-align: center;
+}
+
+.rounded-circle {
+  border-radius: 50%!important;
+  margin: auto;
+  width: 90px;
+  height: 80px;
+}
+.hand{
+  cursor: pointer;
 }

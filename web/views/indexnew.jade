@@ -1,6 +1,83 @@
 extends layout
 
 block content
-  h1= title
+	br
+	div.container
+		h1.page-title= title
+	br
 
-  p Welcome to #{title}
+	div.container
+		div.content
+			div.row
+				div.col-lg-6.col-sm-6.col-xs-12
+					div.progress
+						div.progress-bar.progress-bar-danger(style="width: #{countFalse}0%")
+							span.sr-only 40% Invalid points
+						div.progress-bar.progress-bar-warning(style="width: #{countUnknown}0%")
+							span.sr-only 10% Unknow points
+						div.progress-bar.progress-bar-success(style="width: #{countTrue}0%")
+							span.sr-only 50% Valid points
+				div.col-lg-6.col-sm-6.col-xs-12
+					div #{finalRate}
+	br
+
+	div.container
+		div.content
+			div.row
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Be skeptical of headlines!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationOne.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories often have catchy headlines in all caps with exclamation points. If shocking claims in the headline sound unbelievable, they probably are.") View details &raquo; 					
+				
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Look closely at the URL!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationTwo.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="A phony or look-alike URL may be a warning sign of false news. Many false news sites mimic authentic news sources by making small changes to the URL. You can go to the site to compare the URL to established sources.") View details &raquo;
+				
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Investigate the source!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationThree.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content='Ensure that the story is written by a source that you trust with a reputation for accuracy. If the story comes from an unfamiliar organization, check their "About" section to learn more.') View details &raquo;
+
+			div.row
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Watch for unusual formatting!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationFour.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Many false news sites have misspellings or awkward layouts. Read carefully if you see these signs.") View details &raquo;
+									
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Consider the photos!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationFive.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories often contain manipulated images or videos. Sometimes the photo may be authentic, but taken out of context. You can search for the photo or image to verify where it came from.") View details &raquo;
+				
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Inspect the dates!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationSix.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories may contain timelines that make no sense, or event dates that have been altered.") View details &raquo;
+
+
+				div.row
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Check the evidence!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationSeven.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Check the author's sources to confirm that they are accurate. Lack of evidence or reliance on unnamed experts may indicate a false news story.") View details &raquo;
+									
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Look at other reports!
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationEight.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="If no other news source is reporting the same story, it may indicate that the story is false. If the story is reported by multiple sources you trust, it's more likely to be true.") View details &raquo;
+				
+				div.col-lg-4.col-sm-4.col-xs-12
+					h2 Is the story a joke?
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationNine.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Sometimes false news stories can be hard to distinguish from humor or satire. Check whether the source is known for parody, and whether the story's details and tone suggest it may be just for fun.") View details &raquo;
+
+			div.row.center
+				div.col-lg-12.col-sm-12.col-xs-12
+					h2 Some stories are intentionally false.
+					img.center.rounded-circle(width="110",height="110",data-pass="#{validationTen.valid}")
+					button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Think critically about the stories you read, and only share news that you know to be credible.") View details &raquo;
+
+			div.footer
+			script.
+				$(function () {$('[data-toggle="popover"]').popover()})
