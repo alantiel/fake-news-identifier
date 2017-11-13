@@ -8,6 +8,7 @@ const ValidateOtherSources = require('../services/ValidateOtherSources');
 const ValidateImage = require('../services/ValidateImage');
 const ValidationJoke = require('../services/ValidationJoke');
 const ValidateDate = require('../services/ValidateDate');
+const ValidateEmotions = require('../services/ValidateEmotions');
 
 const calculateScore = function (validations) {
 	var sum = 0;
@@ -55,10 +56,14 @@ module.exports = {
 			validations.push({step:8, valid: false});
 
             const isValidStep9 = ValidationJoke.validate(article.url);
-            validations.push({step:8, valid: isValidStep9.pass});
+            validations.push({step:9, valid: isValidStep9.pass});
 
             const isValidStep10 = {step:10, valid: true};
             validations.push(isValidStep10);
+
+            //valida emotividade do texto (+emocao -verdade)
+            const isEmotionalText = ValidateEmotions.validate(article.desc);
+            validations.push({step:11, valid: isEmotionalText.pass});
 
             validations.forEach((validation)=>{
                 logger.log(validation);

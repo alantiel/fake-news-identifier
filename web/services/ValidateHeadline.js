@@ -35,6 +35,7 @@ const validateHeadline = function(title) {
     const exc = checkExclamationPointsRatio(title);
     const upp = checkUpperCaseLettersRatio(title);
     const sen = checkSensationalismExpressionRatio(title);
+
     logger.log('Title = ' + title);
     logger.log('checkExclamationPointsRatio = ' + exc);
     logger.log('checkUpperCaseLettersRatio = ' + upp);
