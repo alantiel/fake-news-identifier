@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
 		countFalse: responseValidations.countFalse,
 		countTrue: responseValidations.countTrue,
 		countUnknown: responseValidations.countUnknown,
-        finalRate: 'probability of being fake news: '.concat(responseValidations.score).concat('%')
+        finalRate: 'probability of being fake: '.concat(responseValidations.score).concat('%')
     });
 
 });

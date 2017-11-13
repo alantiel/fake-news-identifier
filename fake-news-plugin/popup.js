@@ -14,7 +14,7 @@ var kittenGenerator = {
 		var json = JSON.parse(e.target.responseText);
 		var score = json.score;
 		$('#main-url').empty();
-		$('#main-url').append('<p>Taxa fake: ' + score + '%</p>');
+		$('#main-url').append('<p>probability of being fake: ' + score + '%</p>');
 	}
 };
 
