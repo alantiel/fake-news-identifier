@@ -2,7 +2,7 @@ const levenshtein = require('fast-levenshtein');
 const logger = require('../utils/Logger');
 
 const validateURL = function(url) {
-    const whiteList = ['cnn.com', 'nytimes.com'];
+    const whiteList = ['cnn.com', 'nytimes.com', 'theguardian.com'];
 
     const host = url.split('/')[2];
 
@@ -11,7 +11,6 @@ const validateURL = function(url) {
 	
     whiteList.forEach(function(itemURL) {
         const distance = levenshtein.get(itemURL, host);
-        logger.log(itemURL, url, distance);
         if(distance > 0 && distance < 3 && distance < closestDistance) {
             closestDistance = distance;
             closestURL = itemURL;

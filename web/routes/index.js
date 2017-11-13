@@ -21,10 +21,8 @@ router.get('/', (req, res) => {
 	const resJoke = validations[8];
 	const resTen = validations[9];
 
-	console.log("teste", responseValidations.countFalse);
-
     res.render('index', { 
-        title: 'Fake News Identifier',
+        title: 'Fake-o-meter',
         article: fakeArticle,
         validationOne: resHeadLine,
         validationTwo: resURL,

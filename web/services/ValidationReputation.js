@@ -1,6 +1,6 @@
 const validationReputation = function(url){
 
-    const whiteList = ['bbc.com', 'cnn.com', 'msn.com'];
+    const whiteList = ['bbc.com', 'cnn.com', 'msn.com', 'theguardian.com'];
     const blackList = [ 'bcc.com', 'cnm.com', 'nsm.com','nationalreport.net'];
     const host = url.split('/')[2];
 
@@ -16,3 +16,4 @@ const validationReputation = function(url){
 module.exports = {
 	validate: validationReputation
 }
+

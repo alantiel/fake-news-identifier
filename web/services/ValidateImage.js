@@ -4,7 +4,8 @@ const logger = require('../utils/Logger');
 const GOOGLE_API_CONFIG = require('../config/GOOGLE_API_CONFIG');
 
 const validateImage = function(article){
-    const res = request('POST', GOOGLE_API_CONFIG.VG_ENDPOINT.concat('?key=').concat(GOOGLE_API_CONFIG.G_API_KEY), {
+	
+    const res = request('POST', GOOGLE_API_CONFIG.VG_ENDPOINT.concat('?key=').concat(GOOGLE_API_CONFIG.VG_API_KEY), {
         json:{
             'requests': [
                 {
@@ -30,8 +31,8 @@ const validateImage = function(article){
         const filters = jsonResult.responses[0].labelAnnotations.map((label=> label.description))
             .filter((description) => article.desc.indexOf(description) !== -1);
 
-        logger.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
-        logger.log('matches:'+ filters);
+        //logger.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
+        //logger.log('matches:'+ filters);
         const result = filters.length > 0;
         return { pass: result };
     }else{

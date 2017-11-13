@@ -10,7 +10,7 @@ function validateFormatting(article) {
     keywords.forEach(function(element) {
         if(!dictionary.check(element)) {
             contWrorg++;
-            logger.log(element + ' is misspeled...');
+            //logger.log(element + ' is misspeled...');
         }
     });
 	
