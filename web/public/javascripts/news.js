@@ -1,6 +1,5 @@
 $( document ).ready(function() {
     function rate(point, url) {
-	   console.log(url);
        $.get("/rate?point="+point+"&url="+url)
     }
 
