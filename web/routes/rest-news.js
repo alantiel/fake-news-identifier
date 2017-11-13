@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     const url = req.query.url;
     
     const current = allArtiles
-        .filter(article => article.originUrl === url);
+        .filter(article => article.originUrl === url.replace('www.', ''));
 
 	const validationResponse = validator.validate(current)[0];
 

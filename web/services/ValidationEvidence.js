@@ -1,12 +1,8 @@
-var localStorage = require('localStorage')
+const localStorage = require('localStorage')
 
 const validationEvidence = function(url){
 
-	const host = url.split('/')[2]
-
-	let rate = parseInt(localStorage.getItem('count' + host))
-
-	console.log("evidence: ", rate);
+	let rate = parseInt(localStorage.getItem('count' + url))
 
 	if(isNaN(rate) || rate == 0) {
 	    return {pass: 'unknown'};
