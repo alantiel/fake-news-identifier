@@ -5,13 +5,16 @@ block content
 
 	div(style="position: relative")
 		h1.page-title= title
-	br
-	div.container-fluid
+
+	div.container-fluid.validations
 	
 		div.row
 			div.col-lg-12.col-md-12.col-sm-12.col-xs-12
-				br
-				br
+				div.center
+					h2.final-rate #{finalRate}
+
+		div.row
+			div.col-lg-12.col-md-12.col-sm-12.col-xs-12
 				div.progress
 					div.progress-bar.progress-bar-danger(style="width: #{countFalse}0%")
 					span.sr-only 40% Invalid points
@@ -21,13 +24,7 @@ block content
 					span.sr-only 50% Valid points
 
 		div.row
-			div.col-lg-12.col-md-12.col-sm-12.col-xs-12
-				br
-				div.center
-					h1 #{finalRate}
-
-		div.row
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Be skeptical of headlines!
 				img.center.rounded-circle(data-pass="#{validationOne.valid}")
 				
@@ -37,7 +34,7 @@ block content
 
 				
 			
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Look closely at the URL!
 				img.center.rounded-circle(data-pass="#{validationTwo.valid}")
 				
@@ -45,7 +42,7 @@ block content
 
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Host = #{validationTwo.variables.host}</br>Closest Levenshtein Distance = #{validationTwo.variables.closestDistance}") Details &raquo;				
 			
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Investigate the source!
 				img.center.rounded-circle(data-pass="#{validationThree.valid}")
 				
@@ -54,7 +51,7 @@ block content
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 
 		div.row
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Watch for unusual formatting!
 				img.center.rounded-circle(data-pass="#{validationFour.valid}")
 				
@@ -62,7 +59,7 @@ block content
 
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 								
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Consider the photos!
 				img.center.rounded-circle(data-pass="#{validationFive.valid}")
 
@@ -70,7 +67,7 @@ block content
 
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 			
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Inspect the dates!
 				img.center.rounded-circle(data-pass="#{validationSix.valid}")
 				
@@ -79,7 +76,7 @@ block content
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 
 		div.row
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Check the evidence!
 				img.center.rounded-circle(data-pass="#{validationSeven.valid}")
 
@@ -87,7 +84,7 @@ block content
 
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 								
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Look at other reports!
 				img.center.rounded-circle(data-pass="#{validationEight.valid}")
 				
@@ -95,7 +92,7 @@ block content
 
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 			
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Is the story a joke?
 				img.center.rounded-circle(data-pass="#{validationNine.valid}")
 				
@@ -104,7 +101,7 @@ block content
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 
 		div.row
-			div.col-lg-4.col-sm-4.col-xs-12
+			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Some stories are intentionally false.
 				img.center.rounded-circle(data-pass="#{validationTen.valid}")
 				
