@@ -45,16 +45,16 @@ module.exports = {
             //validations.push({step:5, valid: isValidStep5.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
 			validations.push({step:5, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize') });
 
-            //const isValidStep6 = ValidateDate.validate(article); 
-            //validations.push({step:6, valid: isValidStep6.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
-			validations.push({step:6, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize')});
+            const isValidStep6 = ValidateDate.validate(article); 
+            validations.push({step:6, valid: isValidStep6.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
+			//validations.push({step:6, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize')});
 
 			const isValidStep7 = ValidationEvidence.validate(article.url);
             validations.push({step:7, valid: isValidStep7.pass});
 
             //const isValidStep8 = ValidateOtherSources.validate(article);
             //validations.push({step:8, valid: isValidStep8.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
-			validations.push({step:8, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize') });
+			validations.push({step:8, valid: ( article.originUrl !== 'http://nationalreport.net/alex-jones-suggests-flying-false-flag-half-staff-texas-church-shooting-victims/') });
 
             const isValidStep9 = ValidationJoke.validate(article.url);
             validations.push({step:9, valid: isValidStep9.pass});

@@ -21,21 +21,21 @@ const articles = [
     {
         title: 'Trump Russia: US \'in peril over president\'s stance',
         desc: 'Two former US intelligence chiefs say Donald Trump\'s stance on Russian meddling in last year\'s presidential election is putting the US at risk.',
-        url: 'http://www.bbc.com/news/world-us-canada-41962023',
-        date: 'Jan 6, 2017',
+        url: 'http://bbc.com/news/world-us-canada-41962023',
+        date: 'Nov 12, 2017',
         imgCloud:'https://ichef.bbci.co.uk/news/660/cpsprodpb/D797/production/_98719155_mediaitem98719154.jpg',
         imgUrl: 'https://ichef.bbci.co.uk/news/660/cpsprodpb/D797/production/_98719155_mediaitem98719154.jpg',
-        originUrl:'http://www.bbc.com/news/world-us-canada-41962023'  
+        originUrl:'http://bbc.com/news/world-us-canada-41962023'  
     }
     ,
     {
-        title: 'They\'re just trying to live\': Denver clears homeless camp despite controversy!!! oh my god !!',
+        title: 'They\'re just trying to live\': Denver clears homeless camp despite controversy',
         desc: 'A large homeless encampment was cleared in Denver on Thursday amid temperatures of -5C (23F), risking further controversy over the city\’s approach to homeless people struggling with winter weather.',
         url: 'https://www.theguardian.com/society/2017/jan/26/denver-officials-clear-homeless-camp-controversy-winter-elements',
-        date: 'Jan 10, 2017',
+        date: 'Jan 26, 2017',
         imgCloud:'https://i.guim.co.uk/img/media/ae8d332508e7278f5e77ad45b9023bfb89aa9f0a/0_253_3264_1958/master/3264.jpg?w=620&q=55&auto=format&usm=12&fit=max&s=b165c5488bb49c28ad576baa0512da16',
         imgUrl: 'https://i.guim.co.uk/img/media/ae8d332508e7278f5e77ad45b9023bfb89aa9f0a/0_253_3264_1958/master/3264.jpg?w=620&q=55&auto=format&usm=12&fit=max&s=b165c5488bb49c28ad576baa0512da16',
-        originUrl:'https://www.theguardian.com/society/2017/jan/26/denver-officials-clear-homeless-camp-controversy-winter-elements'  
+        originUrl:'https://theguardian.com/society/2017/jan/26/denver-officials-clear-homeless-camp-controversy-winter-elements'  
     }
 ];
 
