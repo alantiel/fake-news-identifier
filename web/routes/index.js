@@ -4,6 +4,8 @@ const validator = require('../services/Validator');
 
 const articles = require('../input/articles').sample;
 
+const localStorage = require('localStorage')
+
 router.get('/', (req, res) => {
 
 	const fakeArticle = articles[1]; // real article = [0]
@@ -21,10 +23,8 @@ router.get('/', (req, res) => {
 	const resJoke = validations[8];
 	const resTen = validations[9];
 
-	console.log("teste", responseValidations.countFalse);
-
     res.render('index', { 
-        title: 'Fake News Identifier',
+        title: 'Fake-o-meter',
         article: fakeArticle,
         validationOne: resHeadLine,
         validationTwo: resURL,
@@ -41,6 +41,23 @@ router.get('/', (req, res) => {
 		countUnknown: responseValidations.countUnknown,
         finalRate: 'probability of being fake: '.concat(responseValidations.score).concat('%')
     });
+
+});
+
+router.get('/rate', (req, res) => {
+
+	let rate = parseInt(localStorage.getItem('count' + req.query.url))
+
+	if(isNaN(rate) || rate == 0) {
+	    localStorage.setItem('count' + req.query.url, 1);
+	}
+	else {
+       	localStorage.setItem('count' + req.query.url, rate + parseInt(req.query.point));
+    }
+
+	console.log("new count: ", localStorage.getItem('count' + req.query.url));
+
+	res.send();
 
 });
 

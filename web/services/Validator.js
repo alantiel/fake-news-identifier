@@ -9,6 +9,7 @@ const ValidateImage = require('../services/ValidateImage');
 const ValidationJoke = require('../services/ValidationJoke');
 const ValidateDate = require('../services/ValidateDate');
 const ValidateEmotions = require('../services/ValidateEmotions');
+const ValidationEvidence = require('../services/ValidationEvidence');
 
 const calculateScore = function (validations) {
 	var sum = 0;
@@ -24,7 +25,7 @@ const calculateScore = function (validations) {
 
 module.exports = {
     validate: function(articles){
-		logger.log(articles);
+		//logger.log(articles);
 
         articles.forEach(function(article) {
             const validations = [];
@@ -41,19 +42,19 @@ module.exports = {
             validations.push({step:4, valid: isValidStep4.pass});
 
             //const isValidStep5 = ValidateImage.validate(article);
-            //validations.push({step:5, valid: isValidStep5.pass}); // TODO descomentar e apagar a linha abaixo
-			validations.push({step:5, valid: 'unknown'});
+            //validations.push({step:5, valid: isValidStep5.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
+			validations.push({step:5, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize') });
 
             //const isValidStep6 = ValidateDate.validate(article); 
-            //validations.push({step:6, valid: isValidStep6.pass}); // TODO descomentar e apagar a linha abaixo
-			validations.push({step:6, valid: true});
+            //validations.push({step:6, valid: isValidStep6.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
+			validations.push({step:6, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize')});
 
-            const isValidStep7 = {step:7, valid: true};
-            validations.push(isValidStep7);
+			const isValidStep7 = ValidationEvidence.validate(article.url);
+            validations.push({step:7, valid: isValidStep7.pass});
 
             //const isValidStep8 = ValidateOtherSources.validate(article);
-            //validations.push({step:8, valid: isValidStep8.pass}); // TODO descomentar e apagar a linha abaixo
-			validations.push({step:8, valid: false});
+            //validations.push({step:8, valid: isValidStep8.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
+			validations.push({step:8, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize') });
 
             const isValidStep9 = ValidationJoke.validate(article.url);
             validations.push({step:9, valid: isValidStep9.pass});
@@ -62,9 +63,10 @@ module.exports = {
             validations.push(isValidStep10);
 
             //valida emotividade do texto (+emocao -verdade)
-            const isEmotionalText = ValidateEmotions.validate(article.desc);
-            validations.push({step:11, valid: isEmotionalText.pass});
+            //const isEmotionalText = ValidateEmotions.validate(article.desc);
+            //validations.push({step:11, valid: isEmotionalText.pass});
 
+			logger.log(article);
             validations.forEach((validation)=>{
                 logger.log(validation);
             });
