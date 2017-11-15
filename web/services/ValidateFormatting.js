@@ -6,15 +6,16 @@ function validateFormatting(article) {
     const keywords = article.title.match(/\b(\w+)\b/g).concat(article.desc.match(/\b(\w+)\b/g));
     let contWrorg = 0;
 
-
     keywords.forEach(function(element) {
         if(!dictionary.check(element)) {
             contWrorg++;
             //logger.log(element + ' is misspeled...');
         }
     });
+
+    const variables = {contWrorg: contWrorg}
 	
-    return { pass:(contWrorg < 2) ? 'true' : (contWrorg == 2) ? 'unknown' : 'false' , cont: contWrorg};
+    return { pass:(contWrorg < 2) ? 'true' : (contWrorg == 2) ? 'unknown' : 'false' , cont: contWrorg, variables: variables};
 }
 
 module.exports = {

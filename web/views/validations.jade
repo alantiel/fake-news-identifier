@@ -7,7 +7,6 @@ block content
 		h1.page-title= title
 
 	div.container-fluid.validations
-	
 		div.row
 			div.col-lg-12.col-md-12.col-sm-12.col-xs-12
 				div.center
@@ -48,7 +47,7 @@ block content
 				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content='Ensure that the story is written by a source that you trust with a reputation for accuracy. If the story comes from an unfamiliar organization, check their "About" section to learn more.') Info &raquo;
 
-				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Host = #{validationThree.variables.host}") Details &raquo;
 
 		div.row
 			div.col-lg-4.col-sm-4.col-xs-12.validations-card
@@ -57,7 +56,7 @@ block content
 				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Many false news sites have misspellings or awkward layouts. Read carefully if you see these signs.") Info &raquo;
 
-				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Wrorg Words = #{validationFour.variables.contWrorg}") Details &raquo;
 								
 			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Consider the photos!
@@ -65,7 +64,7 @@ block content
 
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories often contain manipulated images or videos. Sometimes the photo may be authentic, but taken out of context. You can search for the photo or image to verify where it came from.") Info &raquo;
 
-				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Tags = #{validationFive.variables.filters}") Details &raquo;
 			
 			div.col-lg-4.col-sm-4.col-xs-12.validations-card
 				h2 Inspect the dates!

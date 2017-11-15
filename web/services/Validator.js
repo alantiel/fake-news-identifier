@@ -36,14 +36,14 @@ module.exports = {
             validations.push({step:2, valid: isValidStep2.pass, variables: isValidStep2.variables});
 
             const isValidStep3 = ValidationReputation.validate(article.url);
-            validations.push({step:3, valid: isValidStep3.pass});
+            validations.push({step:3, valid: isValidStep3.pass, variables: isValidStep3.variables});
 
             const isValidStep4 = ValidateFormatting.validate(article);
-            validations.push({step:4, valid: isValidStep4.pass});
+            validations.push({step:4, valid: isValidStep4.pass, variables: isValidStep4.variables});
 
             //const isValidStep5 = ValidateImage.validate(article);
-            //validations.push({step:5, valid: isValidStep5.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
-			validations.push({step:5, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize') });
+            //validations.push({step:5, valid: isValidStep5.pass, variables: isValidStep5.variables}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
+			validations.push({step:5, valid: ( article.originUrl === 'https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize'), variables: {filters: 'elephant,wildlife,mammal'}});
 
             //const isValidStep6 = ValidateDate.validate(article); 
             //validations.push({step:6, valid: isValidStep6.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)

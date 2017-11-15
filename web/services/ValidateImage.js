@@ -34,9 +34,10 @@ const validateImage = function(article){
         //logger.log(jsonResult.responses[0].labelAnnotations.map((label=> label.description)));
         //logger.log('matches:'+ filters);
         const result = filters.length > 0;
-        return { pass: result };
+        const variables = {filters: filters};
+        return { pass: result , variables: variables};
     }else{
-        return { pass:false };
+        return { pass:false , variables: null};
     }
 
 };

@@ -4,13 +4,16 @@ const validationReputation = function(url){
     const blackList = [ 'bcc.com', 'cnm.com', 'nsm.com','nationalreport.net'];
     const host = url.split('/')[2];
 
+    const variables = {whiteList: whiteList, blackList: blackList, host: host}
+
     if(whiteList.indexOf(host) != -1){
-        return {pass:true};
+        return {pass:true, variables: variables};
     }
     if(blackList.indexOf(host) != -1){
-        return {pass:false};
+        return {pass:false, variables: variables};
     }
     return {pass: 'unknown'};
+
 };
 
 module.exports = {
