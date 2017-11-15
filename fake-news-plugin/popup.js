@@ -13,17 +13,23 @@ var kittenGenerator = {
 	showScore: function(e) {
 		var json = JSON.parse(e.target.responseText);
 		var score = json.score;
-		if (score > 0) {
+		if (score === 0) {
+			$('#main-url').empty();
+			$('#main-url').append('<p>Sorry, we couldn\'t analyze this page.</p> <span style="font-size: 0.8em"> Please, try again later.</span>');
+		} else if (score > 30) {
 			$('#main-url').empty();
 			$('#main-url').append('<span>Probability of being fake: ' + score + '%</span>');
-			$('#feedback-buttons').removeAttr('hidden');
+			$('#feedback-buttons-fake').removeAttr('hidden');
 			$('#fake-graph-bar').removeAttr('hidden');
 			$('#progress-bar').css({ 'width': score + '%' });
 			$('#progress-bar').attr('aria-valuenow', score);
 			$('#fake-value').text(score + '%');
+			$('#more-info').removeAttr('hidden');
 		} else {
 			$('#main-url').empty();
-			$('#main-url').append('<p>Sorry, we couldn\'t analyze this page.</p> <span style="font-size: 0.8em"> Please, try again later.</span>');
+			$('#main-url').append('<span>Article verified <img src="/verified.png" width="20" height="20" title="Verified"></span>');
+			$('#feedback-buttons-real').removeAttr('hidden');
+			$('#more-info').removeAttr('hidden');
 		}
 	}
 };
