@@ -13,7 +13,7 @@ function validateFormatting(article) {
         }
     });
 
-    const variables = {keywords: keywords, contWrorg: contWrorg}
+    const variables = {contWrorg: contWrorg}
 	
     return { pass:(contWrorg < 2) ? 'true' : (contWrorg == 2) ? 'unknown' : 'false' , cont: contWrorg, variables: variables};
 }
