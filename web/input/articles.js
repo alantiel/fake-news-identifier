@@ -31,7 +31,7 @@ const articles = [
     {
         title: 'They\'re just trying to live\': Denver clears homeless camp despite controversy',
         desc: 'A large homeless encampment was cleared in Denver on Thursday amid temperatures of -5C (23F), risking further controversy over the city\’s approach to homeless people struggling with winter weather.',
-        url: 'https://www.theguardian.com/society/2017/jan/26/denver-officials-clear-homeless-camp-controversy-winter-elements',
+        url: 'https://theguardian.com/society/2017/jan/26/denver-officials-clear-homeless-camp-controversy-winter-elements',
         date: 'Jan 26, 2017',
         imgCloud:'https://i.guim.co.uk/img/media/ae8d332508e7278f5e77ad45b9023bfb89aa9f0a/0_253_3264_1958/master/3264.jpg?w=620&q=55&auto=format&usm=12&fit=max&s=b165c5488bb49c28ad576baa0512da16',
         imgUrl: 'https://i.guim.co.uk/img/media/ae8d332508e7278f5e77ad45b9023bfb89aa9f0a/0_253_3264_1958/master/3264.jpg?w=620&q=55&auto=format&usm=12&fit=max&s=b165c5488bb49c28ad576baa0512da16',

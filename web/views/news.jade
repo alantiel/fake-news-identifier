@@ -20,14 +20,26 @@ block content
                   p.card-text(style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75ch;') #{article.desc}
                   a(href='#') Ler mais
                   div
-                      .progress(style='margin-top: 10px')
-                          .progress-bar.bg-danger(role='progressbar',
-                              style='width: #{article.score}%', aria-valuenow='#{article.score}', 
-                              aria-valuemin='0', aria-valuemax='100') #{article.score}%
-                      .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
-                          button.rate-positive.btn.btn-outline-primary.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") This article is actually legit
-                          button.rate-negative.btn.btn-outline-danger.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") Agreed. It's fake
-                      .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
-                          button.detail.btn.btn-outline-info.btn-sm.hand(type='button' name='detail#{index}', data-index="#{index}") Details
+                      if article.score > 30
+                          .progress(style='margin-top: 10px')
+                              .progress-bar.bg-danger(role='progressbar',
+                                  style='width: #{article.score}%', aria-valuenow='#{article.score}', 
+                                  aria-valuemin='0', aria-valuemax='100') #{article.score}%
+
+                          .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
+                              button.rate-positive.btn.btn-outline-primary.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") This article is actually legit
+                              button.rate-negative.btn.btn-outline-danger.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") Agreed. It's fake
+                              button.detail.btn.btn-outline-info.btn-sm.hand(type='button' name='detail#{index}', data-index="#{index}") Details
+                          .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
+                      else
+                          div
+                              img(src="/images/verified.png", width="20", height="20")
+
+                          .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
+                              button.rate-positive.btn.btn-outline-primary.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") Agreed. It's real
+                              button.rate-negative.btn.btn-outline-danger.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") This article is actually fake
+                              button.detail.btn.btn-outline-info.btn-sm.hand(type='button' name='detail#{index}', data-index="#{index}") Details
+                          .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
+                          
 
   script(src='/javascripts/news.js')
