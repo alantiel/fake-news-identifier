@@ -12,6 +12,8 @@ const validateDate = function(article) {
 
     const items = JSON.parse(res.getBody('utf8')).items;
 
+    var variables = "";
+
     const resSize = items.filter(function(item){
         return item.pagemap && item.pagemap.newsarticle && item.pagemap.newsarticle[0].datepublished;
     }).filter(function(item){
@@ -24,11 +26,13 @@ const validateDate = function(article) {
         const limitDays = 7;
         const itemDate = new Date(item.pagemap.newsarticle[0].datepublished);
         logger.log(itemDate, articleDate, compareDates.add(articleDate, limitDays*-1, 'day'), compareDates.add(articleDate, limitDays, 'day'));
+        variables = {itemDate: itemDate, articleDate: articleDate}        
         return compareDates.isBetween(itemDate, compareDates.add(articleDate, limitDays*-1, 'day'), compareDates.add(articleDate, limitDays, 'day'));
     }).length;
 
+    
 	
-    return {pass: resSize > 0};
+    return {pass: resSize > 0, variables: variables};
 };
 
 module.exports = {
