@@ -1,6 +1,9 @@
 body{
   color: rgb(65, 104, 173);
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.7) 100%),url('../images/bg1.jpg');
+  background-size: cover;
 }
+
 h2{
   margin-top: 20px;
   font-size: 24px;
@@ -85,10 +88,6 @@ h2{
   color: rgba(0,0,0,0.6);
   font-weight: 900;
   background: rgb(65, 104, 173); /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left,rgb(65, 104, 173),rgb(108, 182, 49)); /*Safari 5.1-6*/
-  background: -o-linear-gradient(right,rgb(65, 104, 173),rgb(108, 182, 49)); /*Opera 11.1-12*/
-  background: -moz-linear-gradient(right,rgb(65, 104, 173),rgb(108, 182, 49)); /*Fx 3.6-15*/
-  background: linear-gradient(to right, rgb(65, 104, 173), rgb(108, 182, 49)); /*Standard*/ 
 }
 .center{
   display: block;
@@ -138,4 +137,9 @@ video {
   float: right;
   width: auto;
   height: auto;
+}
+.btnBack{
+  position: absolute;
+  top:10px;
+  left: 10px;
 }
