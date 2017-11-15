@@ -1,12 +1,12 @@
 extends layout
 
 block content
-	video.video(autoplay="true",loop="true")
+	//video.video(autoplay="true",loop="true")
 		//source(src="/videos/Aloha-Mundo.mp4", type="video/mp4")
 		//source(src="/videos/technology.mp4", type="video/mp4")
-		source(src="/videos/Inbox-Zero.mp4", type="video/mp4")
-		source(src="/videos/Inbox-Zero.webm", type="video/webm")
-		source(src="/videos/Inbox-Zero.ogv", type="video/ogv")
+		//source(src="/videos/Inbox-Zero.mp4", type="video/mp4")
+		//source(src="/videos/Inbox-Zero.webm", type="video/webm")
+		//source(src="/videos/Inbox-Zero.ogv", type="video/ogv")
 	div.floating
 		for article, index in articles
 			a.btn.btn-rounded(href="/indexnew/#{index}") #{index}
