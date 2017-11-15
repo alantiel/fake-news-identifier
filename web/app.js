@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
-const indexnew = require('./routes/index-new');
+const validations = require('./routes/validations');
 const news = require('./routes/news');
 const restNews = require('./routes/rest-news');
 
@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', news);
-app.use('/indexnew', indexnew);
+app.use('/validations', validations);
 //app.use('/news', news);
 app.use('/rest/news', restNews);
 
