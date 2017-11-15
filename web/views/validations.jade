@@ -11,12 +11,7 @@ block content
 	div.container-fluid
 	
 		div.row
-			div.col-lg-6.col-sm-6.col-xs-12
-				br
-				div
-					h1 #{finalRate}
-
-			div.col-lg-6.col-sm-6.col-xs-12
+			div.col-lg-12.col-md-12.col-sm-12.col-xs-12
 				br
 				br
 				div.progress
@@ -28,25 +23,23 @@ block content
 					span.sr-only 50% Valid points
 
 		div.row
+			div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+				br
+				div.center
+					h1 #{finalRate}
+
+
+		div.row
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Be skeptical of headlines!
+				br
+				img.center.rounded-circle(data-pass="#{validationOne.valid}")
 				
-				ul.nav.nav-tabs(role="tablist")
-					li.nav-nav-item
-						a.nav-link.active(data-toggle="tab",href="#ImageOne",role="tab") Result
-					li.nav-nav-item
-						a.nav-link(data-toggle="tab",href="#VariablesOne",role="tab") Ratios
-				div.tab-content
-					div#ImageOne.tab-pane.active(role="tabpanel")
-						br
-						img.center.rounded-circle(data-pass="#{validationOne.valid}")
-					div#VariablesOne.tab-pane(role="tabpanel")
-						ul.list-group
-							li.list-group-item Exclamation Points = #{validationOne.variables.exc}
-							li.list-group-item UpperCase Letters = #{validationOne.variables.upp}
-							li.list-group-item Sensationalism Expression = #{validationOne.variables.sen}
-
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories often have catchy headlines in all caps with exclamation points. If shocking claims in the headline sound unbelievable, they probably are.") Info &raquo; 					
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true" data-content="<ul class='list-group'><li class='list-group-item'> Exclamation Points = #{validationOne.variables.exc}</li><li class='list-group-item'> UpperCase Letters = #{validationOne.variables.upp}</li><li class='list-group-item'> Sensationalism Expression = #{validationOne.variables.sen}</li></ul>") Details &raquo;
+
+				
 			
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Look closely at the URL!
