@@ -23,6 +23,7 @@ router.get('/:idx', (req, res) => {
 
 	console.log(resHeadLine);
 	console.log(resURL);
+	console.log(resReputation);
 	  res.render('validations', { 
         title: 'Fake-o-meter',
         article: fakeArticle,
