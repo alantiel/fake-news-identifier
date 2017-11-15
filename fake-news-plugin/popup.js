@@ -24,12 +24,12 @@ var kittenGenerator = {
 			$('#progress-bar').css({ 'width': score + '%' });
 			$('#progress-bar').attr('aria-valuenow', score);
 			$('#fake-value').text(score + '%');
-			$('#more-info').removeAttr('hidden');
+			$('#more-info-fake').removeAttr('hidden');
 		} else {
 			$('#main-url').empty();
 			$('#main-url').append('<span>Article verified <img src="/verified.png" width="20" height="20" title="Verified"></span>');
 			$('#feedback-buttons-real').removeAttr('hidden');
-			$('#more-info').removeAttr('hidden');
+			$('#more-info-real').removeAttr('hidden');
 		}
 	}
 };
