@@ -23,9 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', news);
 app.use('/indexnew', indexnew);
-app.use('/news', news);
+//app.use('/news', news);
 app.use('/rest/news', restNews);
 
 // catch 404 and forward to error handler

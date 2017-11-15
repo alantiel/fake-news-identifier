@@ -24,7 +24,7 @@ router.get('/:idx', (req, res) => {
 	console.log(resHeadLine);
 	console.log(resURL);
 	  res.render('indexnew', { 
-        title: 'Fake News Identifier',
+        title: 'Fake-o-meter',
         article: fakeArticle,
         validationOne: resHeadLine,
         validationTwo: resURL,
