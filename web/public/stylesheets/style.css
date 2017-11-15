@@ -85,7 +85,7 @@ h2{
   border-radius: 15px;
   padding: 10px;
   text-align: center;
-  color: rgba(0,0,0,0.6);
+  color: #fff;
   font-weight: 900;
   background: rgb(65, 104, 173); /* For browsers that do not support gradients */
 }

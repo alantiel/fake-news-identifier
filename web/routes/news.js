@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 	const validationResponse = validator.validate(allArtiles);
 
     res.render('news', { 
-        title: 'Fake-o-meter',
+        title: 'fake-o-meter',
         articles: validationResponse
     });
 });

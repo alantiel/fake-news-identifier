@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 	const resTen = validations[9];
 
     res.render('index', { 
-        title: 'Fake-o-meter',
+        title: 'fake-o-meter',
         article: fakeArticle,
         validationOne: resHeadLine,
         validationTwo: resURL,

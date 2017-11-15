@@ -24,7 +24,7 @@ router.get('/:idx', (req, res) => {
 	console.log(resHeadLine);
 	console.log(resURL);
 	  res.render('validations', { 
-        title: 'Fake-o-meter',
+        title: 'fake-o-meter',
         article: fakeArticle,
         validationOne: resHeadLine,
         validationTwo: resURL,
