@@ -13,8 +13,18 @@ var kittenGenerator = {
 	showScore: function(e) {
 		var json = JSON.parse(e.target.responseText);
 		var score = json.score;
-		$('#main-url').empty();
-		$('#main-url').append('<p>probability of being fake: ' + score + '%</p>');
+		if (score > 0) {
+			$('#main-url').empty();
+			$('#main-url').append('<span>Probability of being fake: ' + score + '%</span>');
+			$('#feedback-buttons').removeAttr('hidden');
+			$('#fake-graph-bar').removeAttr('hidden');
+			$('#progress-bar').css({ 'width': score + '%' });
+			$('#progress-bar').attr('aria-valuenow', score);
+			$('#fake-value').text(score + '%');
+		} else {
+			$('#main-url').empty();
+			$('#main-url').append('<p>Sorry, we couldn\'t analyze this page.</p> <span style="font-size: 0.8em"> Please, try again later.</span>');
+		}
 	}
 };
 

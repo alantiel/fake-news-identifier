@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "fake new plugin",
-  "description": "Extension for fake news",
+  "name": "Fake-o-meter Plugin",
+  "description": "Detect a fake article in one click",
   "version": "1.0",
   "permissions": [
     "background",
