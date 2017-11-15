@@ -4,7 +4,7 @@ $( document ).ready(function() {
     }
 
     function detail(index){
-    	window.location="/indexnew/" + index
+    	window.location="/validations/" + index
     }
 
 	$(".rate-positive").click(function(e){
