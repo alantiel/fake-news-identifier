@@ -1,6 +1,6 @@
 body{
   color: rgb(65, 104, 173);
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.7) 100%),url('../images/bg1.jpg');
+  background-color: #f1f1f1;
   background-size: cover;
 }
 
@@ -9,8 +9,13 @@ h2{
   font-size: 24px;
 }
 
+h2.final-rate {
+  font-size: 28px;
+}
+
 .card {
-  margin-bottom: 3px;
+	margin-bottom: 3px;
+    padding-top: 20px;
 }
 .card-img{
   display: block;
@@ -62,9 +67,11 @@ h2{
 }
 
 .progress {
-  margin: 5px;
-	width: 100%;
-	float: right;
+	margin: 0 auto;
+}
+
+.validations .progress {
+	width: 50%;
 }
 
 .progress-bar-success {
@@ -96,9 +103,9 @@ h2{
 
 .rounded-circle {
   border-radius: 50%!important;
-  margin: auto;
-  width: 60px;
-  height: 60px;
+  margin: 10px 10px 10px 13px;
+  width: 40px;
+  height: 40px;
 }
 .hand{
   cursor: pointer;
@@ -121,10 +128,6 @@ video {
   filter: alpha(opacity=70); 
 }
 
-.container-fluid{
-  background-color: rgba(0,0,0,0.1);
-}
-
 .list-group-item{
   background-color: transparent;
   font-size: 14px;
@@ -142,4 +145,17 @@ video {
   position: absolute;
   top:10px;
   left: 10px;
+}
+
+.validations-card {
+    background: #fff;
+    margin: 10px;
+    box-shadow: 3px 3px 3px #888888;
+    border-radius: 5px;
+	flex: 0 0 31%;
+	max-width: 31%;
+}
+
+.validations-card button {
+	float: right;
 }

@@ -5,15 +5,14 @@ block content
 
   div
     h1.page-title= title
-  br
+
 
   div.container-fluid
-    br
+    
     div.row
       for article, index in articles
         div.col-lg-6.col-md-6.col-sm-12.col-xs-12
           div.card
-              hr
               img.card-img(src='#{article.imgUrl}', alt='Card image cap')
               div.card-body
                   h4.card-title #{article.title}
@@ -31,9 +30,9 @@ block content
                                   aria-valuemin='0', aria-valuemax='100') #{article.score}%
 
                           .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
-                              button.rate-positive.btn.btn-outline-primary.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") This article is actually legit
+                              button.rate-positive.btn.btn-outline-primary.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") This article is actually real
                               button.rate-negative.btn.btn-outline-danger.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") Agreed. It's fake
-                              button.detail.btn.btn-outline-info.btn-sm.hand(type='button' name='detail#{index}', data-index="#{index}") Details
+                              button.detail.btn.btn-outline-info.btn-sm.hand(type='button' name='detail#{index}', data-index="#{index}") Why is it fake?
                           .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
                       else
                           div
@@ -43,7 +42,7 @@ block content
                           .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
                               button.rate-positive.btn.btn-outline-primary.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") Agreed. It's real
                               button.rate-negative.btn.btn-outline-danger.btn-sm.hand(type='button' name='opinion#{index}', data-url="#{article.originUrl}") This article is actually fake
-                              button.detail.btn.btn-outline-info.btn-sm.hand(type='button' name='detail#{index}', data-index="#{index}") Details
+                              button.detail.btn.btn-outline-info.btn-sm.hand(type='button' name='detail#{index}', data-index="#{index}") Why is it real?
                           .btn-group(role='group', aria-label='Basic', style="margin-top: 15px;")
                           
 
