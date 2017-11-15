@@ -7,7 +7,6 @@ block content
 		h1.page-title= title
 		button.btnBack.btn.btn-outline-info.btn-sm.hand(type='button', data-url="/") << Back
 	br
-
 	div.container-fluid
 	
 		div.row
@@ -28,95 +27,91 @@ block content
 				div.center
 					h1 #{finalRate}
 
-
 		div.row
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Be skeptical of headlines!
-				br
 				img.center.rounded-circle(data-pass="#{validationOne.valid}")
 				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories often have catchy headlines in all caps with exclamation points. If shocking claims in the headline sound unbelievable, they probably are.") Info &raquo; 					
 
-				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true" data-content="<ul class='list-group'><li class='list-group-item'> Exclamation Points = #{validationOne.variables.exc}</li><li class='list-group-item'> UpperCase Letters = #{validationOne.variables.upp}</li><li class='list-group-item'> Sensationalism Expression = #{validationOne.variables.sen}</li></ul>") Details &raquo;
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Exclamation Points = #{validationOne.variables.exc}</br>UpperCase Letters = #{validationOne.variables.upp}</br>Sensationalism Expression = #{validationOne.variables.sen}") Details &raquo;
 
 				
 			
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Look closely at the URL!
+				img.center.rounded-circle(data-pass="#{validationTwo.valid}")
 				
-				ul.nav.nav-tabs(role="tablist")
-					li.nav-nav-item
-						a.nav-link.active(data-toggle="tab",href="#ImageTwo",role="tab") Result
-					li.nav-nav-item
-						a.nav-link(data-toggle="tab",href="#VariablesTwo",role="tab") Ratios
-				div.tab-content
-					div#ImageTwo.tab-pane.active(role="tabpanel")
-						br
-						img.center.rounded-circle(data-pass="#{validationTwo.valid}")		
-					div#VariablesTwo.tab-pane(role="tabpanel")
-						ul.list-group
-							li.list-group-item White List = #{validationTwo.variables.whiteList}
-							li.list-group-item Host = #{validationTwo.variables.host}
-							li.list-group-item Levenshtein Distance = #{validationTwo.variables.closestDistance}
-
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="A phony or look-alike URL may be a warning sign of false news. Many false news sites mimic authentic news sources by making small changes to the URL. You can go to the site to compare the URL to established sources.") Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Host = #{validationTwo.variables.host}</br>Closest Levenshtein Distance = #{validationTwo.variables.closestDistance}") Details &raquo;				
 			
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Investigate the source!
-
-				ul.nav.nav-tabs(role="tablist")
-					li.nav-nav-item
-						a.nav-link.active(data-toggle="tab",href="#ImageThree",role="tab") Result
-					li.nav-nav-item
-						a.nav-link(data-toggle="tab",href="#VariablesThree",role="tab") Ratios
-				div.tab-content
-					div#ImageThree.tab-pane.active(role="tabpanel")
-						br
-						img.center.rounded-circle(data-pass="#{validationThree.valid}")
-					div#VariablesThree.tab-pane(role="tabpanel")
-						ul.list-group
-							li.list-group-item Under construction
-
+				img.center.rounded-circle(data-pass="#{validationThree.valid}")
+				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content='Ensure that the story is written by a source that you trust with a reputation for accuracy. If the story comes from an unfamiliar organization, check their "About" section to learn more.') Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 
 		div.row
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Watch for unusual formatting!
 				img.center.rounded-circle(data-pass="#{validationFour.valid}")
+				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Many false news sites have misspellings or awkward layouts. Read carefully if you see these signs.") Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 								
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Consider the photos!
 				img.center.rounded-circle(data-pass="#{validationFive.valid}")
+
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories often contain manipulated images or videos. Sometimes the photo may be authentic, but taken out of context. You can search for the photo or image to verify where it came from.") Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 			
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Inspect the dates!
 				img.center.rounded-circle(data-pass="#{validationSix.valid}")
+				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="False news stories may contain timelines that make no sense, or event dates that have been altered.") Info &raquo;
 
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 
 		div.row
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Check the evidence!
 				img.center.rounded-circle(data-pass="#{validationSeven.valid}")
+
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Check the author's sources to confirm that they are accurate. Lack of evidence or reliance on unnamed experts may indicate a false news story.") Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 								
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Look at other reports!
 				img.center.rounded-circle(data-pass="#{validationEight.valid}")
+				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="If no other news source is reporting the same story, it may indicate that the story is false. If the story is reported by multiple sources you trust, it's more likely to be true.") Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 			
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Is the story a joke?
 				img.center.rounded-circle(data-pass="#{validationNine.valid}")
+				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Sometimes false news stories can be hard to distinguish from humor or satire. Check whether the source is known for parody, and whether the story's details and tone suggest it may be just for fun.") Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 
 		div.row
 			div.col-lg-4.col-sm-4.col-xs-12
 				h2 Some stories are intentionally false.
 				img.center.rounded-circle(data-pass="#{validationTen.valid}")
+				
 				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top", data-content="Think critically about the stories you read, and only share news that you know to be credible.") Info &raquo;
+
+				button.btn.btn-link.hand(type="button", data-container="body", data-toggle="popover", data-placement="top",data-html="true", data-content="Under construction") Details &raquo;
 
 		div.footer
 			script.
