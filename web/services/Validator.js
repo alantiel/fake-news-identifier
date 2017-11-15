@@ -39,7 +39,7 @@ module.exports = {
             validations.push({step:3, valid: isValidStep3.pass, variables: isValidStep3.variables});
 
             const isValidStep4 = ValidateFormatting.validate(article);
-            validations.push({step:4, valid: isValidStep4.pass});
+            validations.push({step:4, valid: isValidStep4.pass, variables: isValidStep4.variables});
 
             //const isValidStep5 = ValidateImage.validate(article);
             //validations.push({step:5, valid: isValidStep5.pass}); // TODO descomentar e apagar a linha abaixo (mockando para artigos testados nao fazerem muitas chamadas)
