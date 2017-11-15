@@ -43,18 +43,18 @@
 
         <!-- fake-article feedback buttons -->
         <div id="feedback-buttons-fake" role="group" aria-label="Basic" class="btn-group line" hidden>
-            <button type="button" name="opinion" data-url="https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize" class="rate-positive btn btn-outline-primary btn-sm hand">This article is actually real</button>
-            <button type="button" name="opinion" data-url="https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize" class="rate-negative btn btn-outline-danger btn-sm hand">Agreed. It's fake</button>
+          <button type="button" name="opinion" class="rate-negative btn btn-outline-primary btn-sm hand">Agreed. It's fake</button>
+            <button type="button" name="opinion" class="rate-positive btn btn-outline-danger btn-sm hand">This article is actually real</button>
         </div>
-
         <div id="feedback-buttons-real" role="group" aria-label="Basic" class="btn-group line" hidden>
-          <button type="button" name="opinion" data-url="https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize" class="rate-negative btn btn-outline-primary btn-sm hand">Agreed. It's real</button>
-            <button type="button" name="opinion" data-url="https://theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize" class="rate-positive btn btn-outline-danger btn-sm hand">This article is actually fake</button>
+          <button type="button" name="opinion" class="rate-negative btn btn-outline-primary btn-sm hand">Agreed. It's real</button>
+            <button type="button" name="opinion" class="rate-positive btn btn-outline-danger btn-sm hand">This article is actually fake</button>
         </div>
         
+        <!-- analysis link -->
         <div>
-          <a id="more-info-real" href="" style="font-size: 0.8em; padding-bottom: 10px" hidden> Why is it real?</a>
-          <a id="more-info-fake" href="" style="font-size: 0.8em; padding-bottom: 10px" hidden> Why is it fake?</a>
+          <a id="more-info-real" target="_blank" href="http://localhost:3000/validations/?url=https://www.theguardian.com/world/2017/nov/07/photo-of-elephant-and-calf-fleeing-fire-throwing-mob-wins-top-prize" style="font-size: 0.8em; padding-bottom: 10px" hidden> Why is it real?</a>
+          <a id="more-info-fake" target="_blank" href="http://localhost:3000/validations/?url=http://nationalreport.net/alex-jones-suggests-flying-false-flag-half-staff-texas-church-shooting-victims/" style="font-size: 0.8em; padding-bottom: 10px" hidden> Why is it fake?</a>
         </div>
     </div>
 	</body>
